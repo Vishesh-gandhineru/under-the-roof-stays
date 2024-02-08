@@ -16,9 +16,7 @@ export default function PropertiesGrid() {
               </div>
               <div className="flex flex-col gap-3">
                 <h1 className="text-2xl font-medium">{property.propertyTitle}</h1>
-                <div>
-                  {/* Add any additional content here */}
-                </div>
+
                 <h2 className="text-[#838383] text-lg">{`${property.location.city}, ${property.location.state}, ${property.location.country}`}</h2>
                 <p>{property.description[0]}</p>
                 <h4 className="text-lg font-extrabold">{`Rs ${property.numberofguest.price}/night`}</h4>
