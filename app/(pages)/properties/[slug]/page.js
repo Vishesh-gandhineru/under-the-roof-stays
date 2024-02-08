@@ -11,9 +11,10 @@ export default function PropertiesSinglePage ({ params }) {
             <div className="h-20 m-8">
                 <h1 className="text-red-800 text-5xl font-bold uppercase text-center">Property single page</h1>
             </div>
-            <div className="grid grid-cols-2">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             <div>
             <img src={property.images.backgroundImg} alt="property image" className="rounded-2xl w-100 h-[300px] object-cover" />
+            <button className="bg-red-200 w-full mt-3 px-8 py-3 rounded-md">Book now</button>            
             </div>
             <div>
             <h1 className="text-2xl font-medium">{property.propertyTitle}</h1> 
