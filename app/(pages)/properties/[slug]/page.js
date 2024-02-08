@@ -1,29 +1,31 @@
-import { propertiesList } from "@/app/_util/Property_list/property_list"
-import Image from 'next/image';
+import { propertiesList } from "@/app/_util/Property_list/property_list";
+import Image from "next/image";
+import Heading from "@/app/_components/PropertiesComponents/Heading_property";
+import { HeroBanner } from "@/app/_components/PropertiesComponents/Hero_banner";
+import { LeftSection } from "@/app/_components/PropertiesComponents/Left_section";
 
-
-export default function PropertiesSinglePage ({ params }) {
-
-    const property = propertiesList.find((property) => property.slug === params.slug)
-
-    return (
-        <main className="m-8">
-            <div className="h-20 m-8">
-                <h1 className="text-red-800 text-5xl font-bold uppercase text-center">Property single page</h1>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-            <div>
-            <img src={property.images.backgroundImg} alt="property image" className="rounded-2xl w-100 h-[300px] object-cover" />
-            <button className="bg-red-200 w-full mt-3 px-8 py-3 rounded-md">Book now</button>            
-            </div>
-            <div>
-            <h1 className="text-2xl font-medium">{property.propertyTitle}</h1> 
-            <h2 className="text-[#838383] text-lg">{`${property.location.city}, ${property.location.state}, ${property.location.country}`}</h2>  
-            <h1 className="text-2xl font-medium">{property.description}</h1>              
-
-
-            </div>
-            </div>
-        </main>
-    )
+// import
+export default function PropertiesSinglePage({ params }) {
+  const property = propertiesList.find(
+    (property) => property.slug === params.slug
+  );
+  {
+    console.log(propertiesList);
+  }
+  return (
+    <main className="m-8 flex items-center justify-center">
+      <div className="flex-col justify-center items-center  mt-[20vh]">
+        <Heading
+          title={property.propertyTitle}
+          location={property.location.city}
+        />
+        <HeroBanner property={property} />
+        <div className="flex justify-between mt-[5vh]">
+      
+         <LeftSection property={property}/>
+          <div>Right</div>
+        </div>
+      </div>
+    </main>
+  );
 }
