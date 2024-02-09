@@ -50,6 +50,8 @@ function ProfileForm({ className }){
       <div className="grid gap-2">
         <Label htmlFor="email">Email</Label>
         <Input type="email" id="email" defaultValue="shadcn@example.com" />
+        <Input type="email" id="email" defaultValue="shadcn@example.com" />
+
       </div>
       <div className="grid gap-2">
         <Label htmlFor="username">Username</Label>
