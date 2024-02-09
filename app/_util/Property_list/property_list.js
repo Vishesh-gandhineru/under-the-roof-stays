@@ -1,6 +1,6 @@
 export const propertiesList = [
     {
-        "_ID": 1234567890,
+        "loctionField": "",
         "slug" : "mumbai-house" ,
         "propertyAggregator": {
           "lonoId": null,
@@ -128,7 +128,7 @@ export const propertiesList = [
         }
       } , 
       {
-        "_ID": 123456,
+        "loctionField": "",
         "slug": "serene-mountain-cabin",
         "propertyAggregator": {
           "lonoId": null,
@@ -212,7 +212,7 @@ export const propertiesList = [
       } ,
       // Property 2
 {
-    "_ID": 789012,
+  "loctionField": "",
     "slug": "tranquil-lakeside-retreat",
     "propertyAggregator": {
       "lonoId": null,
@@ -296,7 +296,7 @@ export const propertiesList = [
   } ,
   // Property 3
 {
-    "_ID": 345678,
+  "loctionField": "",
     "slug": "urban-chic-loft",
     "propertyAggregator": {
       "lonoId": null,
