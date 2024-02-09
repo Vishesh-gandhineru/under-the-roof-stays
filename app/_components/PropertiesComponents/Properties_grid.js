@@ -3,12 +3,7 @@ import { propertiesList } from "@/app/_util/Property_list/property_list";
 import Link from "next/link";
 import { HomePageFilter } from "../FIlteringComponents/HomePageFilter";
 
-
-
-
 export default function PropertiesGrid() {
-  // console.log(propertiesList)
-
   return (
     <div>
     <HomePageFilter/>
