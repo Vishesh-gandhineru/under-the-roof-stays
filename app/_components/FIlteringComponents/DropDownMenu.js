@@ -30,13 +30,13 @@ export function DrawerDialog() {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline">Edit Profile</Button>
+          <Button variant="outline">Add Guests</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
+            <DialogTitle>Add Guests</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
+             Add how many people will be there...!
             </DialogDescription>
           </DialogHeader>
           <ProfileForm />
@@ -44,20 +44,68 @@ export function DrawerDialog() {
       </Dialog>
     )
   }
-function ProfileForm({ className }){
-  return (
-    <form className={cn("grid items-start gap-4", className)}>
-      <div className="grid gap-2">
-        <Label htmlFor="email">Email</Label>
-        <Input type="email" id="email" defaultValue="shadcn@example.com" />
-        <Input type="email" id="email" defaultValue="shadcn@example.com" />
+  function ProfileForm({ className }) {
+    const [AdultGuestCount, setAdultGuestCount] = useState(0);
+    const [ChildGuestCount, setChildGuestCount] = useState(0);
+    const [PetsGuestCount, setPetsGuestCount] = useState(0);
 
-      </div>
-      <div className="grid gap-2">
-        <Label htmlFor="username">Username</Label>
-        <Input id="username" defaultValue="@shadcn" />
-      </div>
-      <Button type="submit">Save changes</Button>
-    </form>
-  )
-}
+  
+    const handleAdultAddGuest = (event) => {
+      event.preventDefault(); 
+      setAdultGuestCount(AdultGuestCount + 1);
+    };
+  
+    const handleAdultRemoveGuest = (event) => {
+      event.preventDefault(); 
+      setAdultGuestCount(AdultGuestCount - 1);
+    };
+  
+    const handleChildAddGuest = (event) => {
+      event.preventDefault(); 
+      setChildGuestCount(ChildGuestCount + 1);
+    };
+  
+    const handleChildRemoveGuest = (event) => {
+      event.preventDefault(); 
+      setChildGuestCount(ChildGuestCount - 1);
+    };
+
+    const handlePetsAddGuest = (event) => {
+      event.preventDefault(); 
+      setPetsGuestCount(PetsGuestCount + 1);
+    };
+  
+    const handlePetsRemoveGuest = (event) => {
+      event.preventDefault(); 
+      setPetsGuestCount(PetsGuestCount - 1);
+    };
+    const handleSubmit = (event) => {
+      event.preventDefault();
+
+    };
+  
+    return (
+      <form onSubmit={handleSubmit} className={cn("grid items-start gap-4", className)}>
+        <div className="flex justify-around items-center">
+          <Label htmlFor="adults">Adults - </Label>
+          <p>{AdultGuestCount}</p>
+          <button onClick={handleAdultAddGuest}>Add</button>
+          <button onClick={handleAdultRemoveGuest}>Remove</button>
+        </div>
+        <div className="flex justify-around items-center">
+          <Label htmlFor="children">Children -</Label>
+          <p>{ChildGuestCount}</p>
+          <button onClick={handleChildAddGuest}>Add</button>
+          <button onClick={handleChildRemoveGuest}>Remove</button>
+        </div>
+        <div className="flex justify-around items-center">
+          <Label htmlFor="pets">Pets -</Label>
+          <p>{PetsGuestCount}</p>
+          <button onClick={handlePetsAddGuest}>Add</button>
+          <button onClick={handlePetsRemoveGuest}>Remove</button>
+        </div>
+        <Button type="submit">Submit</Button>
+      </form>
+    );
+  }
+
