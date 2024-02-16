@@ -3,7 +3,7 @@
 import * as React from "react";
 import { addDays, format } from "date-fns";
 import { DateRange } from "react-day-picker";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/app/_components/ui/button";
 import { Calendar } from "@/app/_components/ui/calendar";
@@ -14,11 +14,29 @@ import {
 } from "@/app/_components/ui/popover";
 
 export function DatePickerWithRange({ className }) {
+
   const [date, setDate] = useState({
     from: new Date(),
     to: addDays(new Date(), 1),
   });
 
+  const [DateChanged , setDateChanged] = useState({
+    CheckIn : "" ,
+    CheckOut : "",
+  });
+
+  const handleDateChange = (e) => {
+    setDateChanged({
+      CheckIn: date.from ,
+      CheckOut: date.to
+    });
+  }
+  useEffect(()=>{
+    if (!DateChanged){      
+      localStorage.setItem("DatesSelected", JSON.stringify(DateChanged));
+    }
+
+  } ,[DateChanged])
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>
@@ -53,6 +71,7 @@ export function DatePickerWithRange({ className }) {
             selected={date}
             onSelect={setDate}
             numberOfMonths={2}
+            onChange = {setDateChanged}
           />
         </PopoverContent>
       </Popover>

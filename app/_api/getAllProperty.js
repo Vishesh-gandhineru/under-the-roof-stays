@@ -1,5 +1,9 @@
+
+
 export async function getAllProperty() {
-    const response = await fetch('http://localhost:7000/api/home/get-all');
+
+     const url = process.env.GET_ALL_PROPERTY_API
+    const response = await fetch(url);
     const data = await response.json();
 
     if (data.success) {

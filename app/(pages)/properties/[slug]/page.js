@@ -1,11 +1,14 @@
-import { propertiesList } from "@/app/_util/Property_list/property_list";
+
 import Image from "next/image";
 import Heading from "@/app/_components/PropertiesComponents/Heading_property";
 import { HeroBanner } from "@/app/_components/PropertiesComponents/Hero_banner";
 import { LeftSection } from "@/app/_components/PropertiesComponents/Left_section";
+import { getAllProperty } from "@/app/_api/getAllProperty";
 
 // import
-export default function PropertiesSinglePage({ params }) {
+export default async function PropertiesSinglePage({ params }) {
+
+  const propertiesList = await getAllProperty();
   const property = propertiesList.find(
     (property) => property.slug === params.slug
   );

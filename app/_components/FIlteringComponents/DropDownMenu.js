@@ -12,17 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/app/_components/ui/dialog"
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/app/_components/ui/drawer"
-import { Input } from "@/app/_components/ui/input"
+
 import { Label } from "@/app/_components/ui/label"
 
 export function DrawerDialog() {
