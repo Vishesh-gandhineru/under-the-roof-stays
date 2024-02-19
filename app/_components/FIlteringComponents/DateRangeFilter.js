@@ -13,7 +13,8 @@ import {
   PopoverTrigger,
 } from "@/app/_components/ui/popover";
 
-export function DatePickerWithRange({ className }) {
+
+export  function DatePickerWithRange({ className }) {
 
   const [date, setDate] = useState({
     from: new Date(),
@@ -25,18 +26,34 @@ export function DatePickerWithRange({ className }) {
     CheckOut : "",
   });
 
-  const handleDateChange = (e) => {
+  const [Disable , setDisable] = useState(false);
+
+
+  
+  const handleDateChange = (date) => {
     setDateChanged({
-      CheckIn: date.from ,
-      CheckOut: date.to
+      CheckIn: date?.from,
+      CheckOut: date?.to
     });
-  }
-  useEffect(()=>{
-    if (!DateChanged){      
+  };
+  
+
+  useEffect(() => {
+    if (DateChanged.CheckIn && DateChanged.CheckOut) {
       localStorage.setItem("DatesSelected", JSON.stringify(DateChanged));
     }
+  }, [DateChanged]);
 
-  } ,[DateChanged])
+useEffect(() => {
+  const getDates = JSON.parse(localStorage.getItem('DatesSelected'));
+  if (getDates) {
+    setDate({
+      from: new Date(getDates.CheckIn),
+      to: new Date(getDates.CheckOut)
+    });
+  }
+} , [1]);
+
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>
@@ -69,9 +86,12 @@ export function DatePickerWithRange({ className }) {
             mode="range"
             defaultMonth={date?.from}
             selected={date}
-            onSelect={setDate}
+            onSelect={(date)=>{
+              setDate(date);
+              handleDateChange(date);
+            }}
             numberOfMonths={2}
-            onChange = {setDateChanged}
+            
           />
         </PopoverContent>
       </Popover>

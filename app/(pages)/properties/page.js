@@ -1,5 +1,6 @@
 import { AdvcancedFilterProperty } from "@/app/_components/FIlteringComponents/AdvcancedFilterProperty";
 import PropertiesGrid from "@/app/_components/PropertiesComponents/Properties_grid";
+import { HomePageFilter } from "@/app/_components/FIlteringComponents/HomePageFilter";
 
 export default function Properties() {
   return (
@@ -14,7 +15,10 @@ export default function Properties() {
         <div className="w-[100%] border-r-2 border-r-[#bababa] mt-[25px] pt-[15px]  border-solid ">
           <AdvcancedFilterProperty/>
         </div>
+        <div>
+        <HomePageFilter/>
         <PropertiesGrid/>
+        </div>
       </section>
     </main>
   );

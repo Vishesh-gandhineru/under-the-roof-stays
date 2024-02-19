@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Input } from "../../ui/input";
 import { debounce } from "lodash"; 
-import { GetLocationFromLocal } from "@/app/_util/globleFunction/StoreFilterValue";
+
 export default function LocationInput() {
   const [open, setOpen] = useState(false);
   const [location, setLocation] = useState("");
@@ -12,10 +12,18 @@ export default function LocationInput() {
     state: ""
   });
 
-  const LocationfromLocal = GetLocationFromLocal();
+  const getLocationFromLocalStorage = () => {
+    const storedLocation = localStorage.getItem("location");
+    if (storedLocation) {
+      const parsedLocation = JSON.parse(storedLocation);
+      setSelectedLocation(parsedLocation);
+      setLocation(`${parsedLocation.city} , ${parsedLocation.state}`)
+    }
+  };
 
-  console.log("Location form local" , LocationfromLocal);
-  console.log("selected location" , selectedLocation);
+  useEffect(() => {
+    getLocationFromLocalStorage();
+  }, []);
 
   const handleDropdown = (e) => {
     const updatedLocation = e.target.value;
@@ -36,8 +44,6 @@ export default function LocationInput() {
     });
   };
 
- 
-
   const getSuggestions = debounce(async (location) => {
     const url = `http://localhost:7000/api/filters/auto-filter/${location}`;
     try {
@@ -53,7 +59,7 @@ export default function LocationInput() {
     if (location.length >= 3) {
       getSuggestions(location); 
     }
-  }, [location]); 
+  }, [location, getSuggestions]); 
 
   useEffect(()=>{
    if (selectedLocation.city != "" && selectedLocation.state != ""){
@@ -62,21 +68,6 @@ export default function LocationInput() {
   }, [selectedLocation])
 
 
-  useEffect(()=>{
-    if (LocationfromLocal != null){
-      // setSelectedLocation({
-      //   city: LocationfromLocal?.city ,
-      //   state: LocationfromLocal?.state
-      // });
-
-      console.log("not empty location")
-    } else 
-      {
-    console.log("its empty")
-   }
-  },[])
-
-  
 
   return (
     <div>

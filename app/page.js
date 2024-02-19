@@ -1,5 +1,6 @@
 import Image from "next/image";
 import PropertiesGrid from "./_components/PropertiesComponents/Properties_grid";
+import { HomePageFilter } from "./_components/FIlteringComponents/HomePageFilter";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <h1 className="text-red-800 text-5xl font-bold uppercase text-center">Home</h1>
       </div>
     </main>
+    <HomePageFilter/>
     <PropertiesGrid/>
 
     </div>

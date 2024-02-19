@@ -8,7 +8,7 @@ export default async function PropertiesGrid() {
   const propertiesList = await getAllProperty();
   return (
     <div>
-    <HomePageFilter/>
+    
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
           {propertiesList.map((property) => (
             <Link key={property._ID} href={`/properties/${property.slug}`}>

@@ -7,11 +7,9 @@ import { Faqs } from "./Faq_section";
 import { GuestsAllowed } from "./Guest_allowed";
 
 export const LeftSection = ({ property }) => {
-  {
-    console.log(`suyash`, property);
-  }
+  
   return (
-    <div className="w-[691.2px] ">
+    <div className="w-[650px]">
       <h2 className="text-[25px] font-bold">
         Price - Rs.{property.numberofguest.price}
       </h2>
