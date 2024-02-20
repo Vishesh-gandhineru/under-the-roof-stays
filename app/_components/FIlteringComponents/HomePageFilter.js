@@ -2,6 +2,7 @@ import { type } from 'os'
 import React from 'react'
 import { DatePickerWithRange } from './DateRangeFilter'
 import { DrawerDialog } from './DropDownMenu'
+import AddGuest from './AddGuest'
 
 import LocationInput from './HomeFilter/LocationInput'
 
@@ -15,6 +16,8 @@ export const HomePageFilter = () => {
            <LocationInput/>
             <DatePickerWithRange/>
             <DrawerDialog/>
+            <AddGuest/>
+            
             <button className='bg-[#000] text-[#fff] py-[0px] px-[30px] rounded-[5px]'>Search</button>
         </div>
     </div>
