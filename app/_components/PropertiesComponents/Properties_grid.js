@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { propertiesList } from "@/app/_util/Property_list/property_list";
 import Link from "next/link";
-import { HomePageFilter } from "../FIlteringComponents/HomePageFilter";
+import { HomePageFilter } from "../FIlteringComponents/HomeFilter/HomePageFilter";
 
 export default function PropertiesGrid() {
   return (
