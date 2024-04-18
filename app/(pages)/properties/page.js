@@ -1,4 +1,4 @@
-import { AdvcancedFilterProperty } from "@/app/_components/FIlteringComponents/AdvcancedFilterProperty";
+import { AdvcancedFilterProperty } from "@/app/_components/FIlteringComponents/PropertiesPageFilter/AdvcancedFilterProperty";
 import PropertiesGrid from "@/app/_components/PropertiesComponents/Properties_grid";
 
 export default function Properties() {

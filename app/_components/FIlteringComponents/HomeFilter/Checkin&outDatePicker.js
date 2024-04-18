@@ -13,7 +13,7 @@ import {
   PopoverTrigger,
 } from "@/app/_components/ui/popover";
 
-export function DatePickerWithRange({ className }) {
+export function CheckinOutDatePicker({ className }) {
   const [date, setDate] = useState({
     from: new Date(),
     to: addDays(new Date(), 1),
@@ -27,7 +27,7 @@ export function DatePickerWithRange({ className }) {
             id="date"
             variant={"outline"}
             className={cn(
-              "w-[300px] justify-start text-left font-normal",
+              "w-[300px] justify-start text-left font-normal h-[inherit]",
               !date && "text-muted-foreground"
             )}
           >
