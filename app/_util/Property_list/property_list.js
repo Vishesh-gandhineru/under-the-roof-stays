@@ -1,5 +1,5 @@
 export const propertiesList = [
-    {
+    {   "propertyId": 1,
         "loctionField": "",
         "slug" : "mumbai-house" ,
         "propertyAggregator": {
@@ -128,6 +128,7 @@ export const propertiesList = [
         }
       } , 
       {
+        "propertyId": 2,
         "loctionField": "",
         "slug": "serene-mountain-cabin",
         "propertyAggregator": {
@@ -212,6 +213,7 @@ export const propertiesList = [
       } ,
       // Property 2
 {
+  "propertyId": 3,
   "loctionField": "",
     "slug": "tranquil-lakeside-retreat",
     "propertyAggregator": {
@@ -296,6 +298,7 @@ export const propertiesList = [
   } ,
   // Property 3
 {
+  "propertyId": 4,
   "loctionField": "",
     "slug": "urban-chic-loft",
     "propertyAggregator": {

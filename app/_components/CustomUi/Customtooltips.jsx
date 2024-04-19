@@ -4,14 +4,13 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-import { Info } from "lucide-react";
 
 
-export default function CustomTooltip ({content}) {
+export default function CustomTooltip ({content , tooltipIcon}) {
  return (
   <TooltipProvider delayDuration={100}>
   <Tooltip>
-    <TooltipTrigger><Info /></TooltipTrigger>
+    <TooltipTrigger>{tooltipIcon}</TooltipTrigger>
     <TooltipContent >
       <p>{content}</p>
     </TooltipContent>
