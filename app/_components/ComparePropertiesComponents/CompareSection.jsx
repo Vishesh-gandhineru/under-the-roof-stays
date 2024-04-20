@@ -4,10 +4,14 @@ import { PlusCircle , X } from "lucide-react";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import AddItemToCompare from "../CustomUi/AddItemToCompare";
 
 export default function CompareSection() {
 
+   
   
+
+
   const [compareData, setCompareData] = useState([]); 
   // Create an array with 3 null elements to ensure we always have 3 columns
   const columns = [null, null, null];
@@ -22,7 +26,6 @@ export default function CompareSection() {
     compare = compare.filter((_, i) => i !== index);
     sessionStorage.setItem('compare', JSON.stringify(compare));
     setCompareData([...compare]);
-    console.log("removed" , compareData)
  }
 
 
@@ -52,7 +55,7 @@ export default function CompareSection() {
           // Otherwise, render the default section
           return (
             <div key={index} className="border rounded-2xl p-8 flex justify-center items-center h-full">
-              <PlusCircle/>
+              <AddItemToCompare />
             </div>
           );
         })}

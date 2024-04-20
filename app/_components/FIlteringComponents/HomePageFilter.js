@@ -3,7 +3,7 @@ import { CheckinOutDatePicker } from './HomeFilter/Checkin&outDatePicker'
 import { AddGuest } from './HomeFilter/addGuest'
 
 
-export const HomePageFilter = () => {
+export const  HomePageFilter = () => {
 
   return (
    <div className='flex-column'>

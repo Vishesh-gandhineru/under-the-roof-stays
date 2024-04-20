@@ -13,15 +13,26 @@ export default function CompareButton({property}) {
         compare.push(property);
         sessionStorage.setItem('compare', JSON.stringify(compare));
         toast.success("Property added to compare", {
-            action: <Link href="/compare">See Compare</Link>
+            action: <Link href="/compare" className="bg-white text-black p-3 rounded-lg" >See Compare</Link>,
+            style: {
+                background: 'rgb(84, 255, 176)',
+              },
         });
         }else if(alreadyExists){
-            toast.success("Property is already added", {
-                action: <Link href="/compare">See Compare</Link>
+            toast.warning("Property is already added", {
+                action: <Link href="/compare" className="bg-white text-black p-3 rounded-lg">See Compare</Link>,
+                style: {
+                    background: '#e4606d',
+                    color: '#fff',
+                  },
             });
         }else{
         toast.error('You can only compare 3 properties at a time', {
-            action: <Link href="/compare">See Compare</Link>
+            action: <Link href="/compare" className="bg-white text-black p-3 rounded-lg" >See Compare</Link>,
+            style: {
+                background: '#e4606d',
+                color: '#fff',
+              },
         });
         }
     }

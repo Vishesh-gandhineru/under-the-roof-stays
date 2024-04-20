@@ -1,20 +1,21 @@
-import Image from "next/image"
 import { propertiesList } from "@/app/_util/Property_list/property_list";
-import Link from "next/link";
-import { HomePageFilter } from "../FIlteringComponents/HomePageFilter";
-import { Columns3 } from 'lucide-react';
-import CustomTooltip from "../CustomUi/Customtooltips";
-import { Toaster } from "../ui/sonner";
-import CompareButton from "../CustomUi/CompareButtom";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+  } from "../ui/carousel"
+  import Link from "next/link";
+  import CompareButton from "../CustomUi/CompareButtom";
 
-
-
-export default function PropertiesGrid() {
-  return (
-    <div>    
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 relative">
-          {propertiesList.map((property) => (
-            <section key={property.propertyId}>
+export default function Properties_slider() {
+    return(
+       <Carousel>
+  <CarouselContent>
+    {propertiesList.map((property) => {
+        return <CarouselItem key={property.propertyId} className="basis-1/3 p-4" >
+            <section>
             <div  className="border rounded-2xl border-gray text-black flex flex-col gap-5 relative">
               <Link className="relative" href={`/properties/${property.slug}`}>
                 <img src={property.images.backgroundImg} alt="property image" className="rounded-2xl" />
@@ -31,9 +32,11 @@ export default function PropertiesGrid() {
               </div>
             </div>           
             </section>
-          ))}
-        </div>
-        <Toaster />
-        </div>
-      );
+        </CarouselItem>
+    })}
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+    )
 }
