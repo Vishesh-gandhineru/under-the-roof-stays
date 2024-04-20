@@ -3,16 +3,17 @@
 import { PlusCircle , X } from "lucide-react";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState , useContext } from "react";
 import AddItemToCompare from "../CustomUi/AddItemToCompare";
+import { useCompare } from "@/app/context/useCompare";
 
 export default function CompareSection() {
 
-   
-  
-
-
-  const [compareData, setCompareData] = useState([]); 
+ const {compareData ,setCompareData} = useCompare((state)=> ({
+    compareData : state.compareData,
+    setCompareData : state.setCompareData,
+ }));
+  // const [compareData, setCompareData] = useState([]); 
   // Create an array with 3 null elements to ensure we always have 3 columns
   const columns = [null, null, null];
 
@@ -26,6 +27,7 @@ export default function CompareSection() {
     compare = compare.filter((_, i) => i !== index);
     sessionStorage.setItem('compare', JSON.stringify(compare));
     setCompareData([...compare]);
+
  }
 
 

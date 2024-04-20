@@ -1,10 +1,5 @@
-import Image from "next/image"
 import { propertiesList } from "@/app/_util/Property_list/property_list";
 import Link from "next/link";
-import { HomePageFilter } from "../FIlteringComponents/HomePageFilter";
-import { Columns3 } from 'lucide-react';
-import CustomTooltip from "../CustomUi/Customtooltips";
-import { Toaster } from "../ui/sonner";
 import CompareButton from "../CustomUi/CompareButtom";
 
 
@@ -33,7 +28,6 @@ export default function PropertiesGrid() {
             </section>
           ))}
         </div>
-        <Toaster />
         </div>
       );
 }

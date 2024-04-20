@@ -17,8 +17,6 @@ import Properties_slider from "../PropertiesComponents/Properties_slider"
 
 export default function AddItemToCompare() {
 
-
-
   return (
     <Drawer>
       <DrawerTrigger asChild>     

@@ -8,9 +8,11 @@ import {
   } from "../ui/carousel"
   import Link from "next/link";
   import CompareButton from "../CustomUi/CompareButtom";
+  import { Toaster } from "../ui/sonner";
 
 export default function Properties_slider() {
     return(
+        <div>        
        <Carousel>
   <CarouselContent>
     {propertiesList.map((property) => {
@@ -38,5 +40,7 @@ export default function Properties_slider() {
   <CarouselPrevious />
   <CarouselNext />
 </Carousel>
+    <Toaster />
+        </div>
     )
 }
