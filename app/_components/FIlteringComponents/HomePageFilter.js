@@ -1,7 +1,6 @@
-import { type } from 'os'
 import React from 'react'
-import { CheckinOutDatePicker } from './Checkin&outDatePicker'
-import { AddGuest } from './addGuest'
+import { CheckinOutDatePicker } from './HomeFilter/Checkin&outDatePicker'
+import { AddGuest } from './HomeFilter/addGuest'
 
 
 export const HomePageFilter = () => {

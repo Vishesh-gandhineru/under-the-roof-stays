@@ -11,7 +11,7 @@ export default function CustomTooltip ({content , tooltipIcon}) {
   <TooltipProvider delayDuration={100}>
   <Tooltip>
     <TooltipTrigger>{tooltipIcon}</TooltipTrigger>
-    <TooltipContent >
+    <TooltipContent>
       <p>{content}</p>
     </TooltipContent>
   </Tooltip>

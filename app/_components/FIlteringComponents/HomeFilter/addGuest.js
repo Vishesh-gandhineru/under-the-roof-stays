@@ -41,7 +41,7 @@ export function AddGuest() {
   
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("GuestData"));
+    const data = JSON.parse(sessionStorage.getItem("GuestData"));
     if (data) {
       setAdultGuestCount(data.AdultGuestCount);
       setChildGuestCount(data.ChildGuestCount);
@@ -95,7 +95,7 @@ export function AddGuest() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    localStorage.setItem(
+    sessionStorage.setItem(
       "GuestData",
       JSON.stringify({ AdultGuestCount, ChildGuestCount, PetsGuestCount })
     );
