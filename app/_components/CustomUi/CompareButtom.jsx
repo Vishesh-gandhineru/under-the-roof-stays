@@ -8,12 +8,17 @@ import Link from "next/link";
 export default function CompareButton({property}) {
     const handleCompare = () => {
         let compare = JSON.parse(sessionStorage.getItem('compare')) || [];
-        if(compare.length < 3){
+        const alreadyExists = compare.some(comp => comp.propertyId === property.propertyId);
+        if(compare.length < 3 && !alreadyExists ){
         compare.push(property);
         sessionStorage.setItem('compare', JSON.stringify(compare));
-        toast.success('Property added to compare', {
+        toast.success("Property added to compare", {
             action: <Link href="/compare">See Compare</Link>
         });
+        }else if(alreadyExists){
+            toast.success("Property is already added", {
+                action: <Link href="/compare">See Compare</Link>
+            });
         }else{
         toast.error('You can only compare 3 properties at a time', {
             action: <Link href="/compare">See Compare</Link>

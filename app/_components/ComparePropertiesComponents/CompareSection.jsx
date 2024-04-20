@@ -3,17 +3,22 @@
 import { PlusCircle , X } from "lucide-react";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CompareSection() {
 
-  let compare = JSON.parse(sessionStorage.getItem('compare')) || [];
   
-  const [compareData, setCompareData] = useState(compare); 
+  const [compareData, setCompareData] = useState([]); 
   // Create an array with 3 null elements to ensure we always have 3 columns
   const columns = [null, null, null];
 
+  useEffect(() => {
+    let compare = JSON.parse(sessionStorage.getItem('compare')) || [];
+    setCompareData(compare);
+  },[])
+
  const removeCompareItem = (index) => {
+  let compare = JSON.parse(sessionStorage.getItem('compare')) || [];
     compare = compare.filter((_, i) => i !== index);
     sessionStorage.setItem('compare', JSON.stringify(compare));
     setCompareData([...compare]);
