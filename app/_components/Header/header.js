@@ -9,6 +9,7 @@ const Header = () => {
                     <Link href="/properties" className="ml-4 text-white">Properties</Link>
                     <Link href="/about" className="ml-4 text-white">About</Link>
                     <Link href="/compare" className="ml-4 text-white">Compare</Link>
+                    <Link href="/login" className="ml-4 text-white">Login</Link>
                 </div>
                 <div className="flex items-center">
                     {/* Add any additional elements here */}
