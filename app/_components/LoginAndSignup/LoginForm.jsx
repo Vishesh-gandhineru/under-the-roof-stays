@@ -2,20 +2,24 @@
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import {  useState } from "react";
-import { postLoginWithOTP } from "@/app/_util/Property_list/LoginAPI";
+import { postLoginWithOTP } from "@/app/_util/LoginAPI";
 import OtpComponent from "./OTPComponent";
+import { PhoneWithCountryCode } from "./PhoneWithCountryCode";
+import { verifyOTP } from "@/app/_util/LoginAPI";
+
 
 
 export default function LoginForm() {
-    const [countryCode, setCountryCode] = useState("");
+    const [countryCode, setCountryCode] = useState("+91");
     const [phone, setPhone] = useState("");
     const [isLoading , setIsLoading] = useState(false);
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [OtpVerified , setOtpVerified] = useState(false);
 
     const body= {
         "phone": phone,
-        "countryCode":`+${countryCode}`,
+        "countryCode":countryCode,
         "role": "user"
     }
  function handleSubmit(e) {
@@ -37,16 +41,26 @@ function handleOnChange(e){
     }
 }
 
+function OtpSubmit(data) {
+  const OtpBody = {...body , "otp": data.pin}
+  console.log(OtpBody);
+  verifyOTP(OtpBody , setOtpVerified);
+}
+
+
   return (
     <section>
     {isLoading && <p>Loading...</p>}
     {!success ? <form className="flex justify-center items-center gap-3" onSubmit={handleSubmit}>
-        <Input type="text" placeholder="country code" name="countryCode" className="w-[30%]" value={countryCode} onChange={handleOnChange} disabled={!isLoading ? false : true } />
-        <Input type="number" placeholder="phone number" name="phone" className="w-[30%]" value={phone} onChange={handleOnChange} disabled={!isLoading ? false : true } />
+      <div className="flex">
+        <PhoneWithCountryCode  setCountryCode={setCountryCode}/>
+        <Input type="number" placeholder="phone number" name="phone" className="w-[100%] rounded-l-none  " value={phone} onChange={handleOnChange} disabled={!isLoading ? false : true } />
+      </div>
 
       <Button type="submit">Login</Button>
-    </form> :
-    <OtpComponent body={body} />}
+    </form> : 
+    <OtpComponent body={body} OtpSubmit={OtpSubmit} OtpVerified={OtpVerified} />}
+  
     </section>
   );
 }

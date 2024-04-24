@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { useState } from "react"
-import { verifyOTP } from "@/app/_util/Property_list/LoginAPI"
+import { verifyOTP } from "@/app/_util/LoginAPI"
 
 import { Button } from "../ui/button"
 import {
@@ -29,10 +29,10 @@ const FormSchema = z.object({
   }),
 })
 
-export default function OtpComponent({body}) {
+export default function OtpComponent({OtpSubmit , OtpVerified}) {
 
  const [OtpCode , setOtpCode] = useState("");
- const [OtpVerified , setOtpVerified] = useState(false);
+//  const [OtpVerified , setOtpVerified] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(FormSchema),
@@ -41,17 +41,12 @@ export default function OtpComponent({body}) {
     },
   })
 
-  function onSubmit(data) {
-    const OtpBody = {...body , "otp": data.pin}
-    console.log(OtpBody);
-    verifyOTP(OtpBody , setOtpVerified);
-  }
-
+ 
 
   return (
     <section>
    {!OtpVerified ? <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form onSubmit={form.handleSubmit(OtpSubmit)} className="w-2/3 space-y-6">
         <FormField
           control={form.control}
           name="pin"

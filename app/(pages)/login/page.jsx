@@ -1,3 +1,5 @@
+"use client"
+import { useSession } from "@/app/context/useSession"
 
 import PhoneInput from "@/app/_components/LoginAndSignup/LoginForm"
 import SignupForm from "@/app/_components/LoginAndSignup/SignupForm"
@@ -12,6 +14,9 @@ import {
 } from "../../_components/ui/tabs"
 
 export default function login() {
+
+ const session = useSession(state => state.session);
+
   return (
     <main className="my-[60px]">
        <article className="h-fit m-8">
