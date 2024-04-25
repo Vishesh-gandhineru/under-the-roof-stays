@@ -1,6 +1,6 @@
 import axios from "axios";
-import { set } from "date-fns";
 import { useSession } from "../context/useCompare";
+import { redirect } from 'next/navigation'
 
 export function postLoginWithOTP (body , setIsLoading , setError , setSuccess) {
     setIsLoading(true);
@@ -30,9 +30,10 @@ export function verifyOTP (body , setOtpVerified){
     .then((response) => {
         console.log(response);
         if (response.status === 200){
+     setOtpVerified(true);
      localStorage.setItem('Sessiontoken', response.data.data.sessionId);
-    setOtpVerified(true);
-        }
+     window.location.reload();
+    }
         return response;
     })
     .catch((error) => {
@@ -99,4 +100,26 @@ export function verifyRegisterOTP (OtpBody , setOtpVerified , FormData){
         console.log(error);
     }
     )
+}
+
+
+export function logout (session) {
+    const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/logout`;
+     axios.post(url,{},{ 
+        headers: {
+            'Authorization': session
+        }
+     } )
+     .then (response => {
+         console.log(response);
+         if(response.status === 200){
+            localStorage.removeItem('Sessiontoken');
+            window.location.reload();
+         }
+         return response;
+     })
+     .catch(error => {
+            console.log(error);
+     }
+        )
 }

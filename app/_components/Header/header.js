@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useSession } from '@/app/context/useSession';
+import { logout } from '@/app/_util/LoginAPI';
 
 const Header = () => {
  
@@ -19,7 +20,7 @@ const Header = () => {
                 </div>
                 <div className="flex items-center">
                     {session && <Link href="/dashboard" className="ml-4 text-white">Dashboard</Link>}
-                    <Link href="/login" className="ml-4 text-white">Login</Link>
+                    {!session ? <Link href="/login" className="ml-4 text-white">Login</Link> : <button onClick={()=> logout(session)} className="ml-4 text-white">Logout</button>}
                 </div>
             </nav>
         </header>
