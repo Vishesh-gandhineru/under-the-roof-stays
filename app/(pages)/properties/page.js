@@ -10,11 +10,11 @@ export default function Properties() {
         </h1>
       </div> */}
 
-      <section className="flex">
-        <div className="w-[100%] border-r-2 border-r-[#bababa] mt-[25px] pt-[15px]  border-solid ">
+      <section className="flex gap-5">
+        <div className="w-[30%] border-r-2 border-r-[#bababa] mt-[25px] pt-[15px]  border-solid ">
           <AdvcancedFilterProperty/>
         </div>
-        {/* <PropertiesGrid/> */}
+        <PropertiesGrid/>
       </section>
     </main>
   );

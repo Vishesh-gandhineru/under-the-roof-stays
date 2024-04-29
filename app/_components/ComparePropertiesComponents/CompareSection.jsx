@@ -43,11 +43,11 @@ export default function CompareSection() {
               <div key={property.slug} className="border rounded-2xl h-fit flex flex-col gap-8 justify-center items-center relative pb-5">
                 <div>
                 <Link className="relative" href={`/properties/${property.slug}`}>
-                <img src={property.images.backgroundImg} alt="property image" className="rounded-2xl" />
+                <img src={property.images[0].url} alt="property image" className="rounded-2xl h-[300px] w-screen object-cover" />
               </Link>
                 </div>
                 <div>
-                <Link href={`/properties/${property.slug}`} className="text-2xl font-medium">{property.propertyTitle}</Link>
+                <Link href={`/properties/${property.slug}`} className="text-2xl font-medium">{property.general.name}</Link>
                 </div>
                 <div className="rounded-full bg-white absolute p-2 top-3 right-3 cursor-pointer" onClick={()=>removeCompareItem(index)}><X /></div>
               </div>

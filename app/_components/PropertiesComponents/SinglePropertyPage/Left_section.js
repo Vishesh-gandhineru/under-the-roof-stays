@@ -13,9 +13,9 @@ export const LeftSection = ({ property }) => {
       <div>
         
         <h2 className="font-bold text-3xl mb-3">Detail</h2>
-        {property.descriptions.map(item =>{
+        {property.descriptions.map((item , index) =>{
           return (
-            <SinglePropertyDescription typeCode={item.typeCode} text={item.text} />
+            <SinglePropertyDescription key={index} typeCode={item.typeCode} text={item.text} />
           )
         })}
       </div>
