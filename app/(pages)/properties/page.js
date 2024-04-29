@@ -14,7 +14,7 @@ export default function Properties() {
         <div className="w-[100%] border-r-2 border-r-[#bababa] mt-[25px] pt-[15px]  border-solid ">
           <AdvcancedFilterProperty/>
         </div>
-        <PropertiesGrid/>
+        {/* <PropertiesGrid/> */}
       </section>
     </main>
   );

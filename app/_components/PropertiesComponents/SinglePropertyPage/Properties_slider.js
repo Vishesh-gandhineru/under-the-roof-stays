@@ -5,10 +5,10 @@ import {
     CarouselItem,
     CarouselNext,
     CarouselPrevious,
-  } from "../ui/carousel"
+  } from "../../ui/carousel"
   import Link from "next/link";
-  import CompareButton from "../CustomUi/CompareButtom";
-  import { Toaster } from "../ui/sonner";
+  import CompareButton from "../../CustomUi/CompareButtom";
+  import { Toaster } from "../../ui/sonner";
 
 export default function Properties_slider() {
     return(

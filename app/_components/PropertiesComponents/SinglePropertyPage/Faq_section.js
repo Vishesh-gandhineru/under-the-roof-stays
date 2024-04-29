@@ -1,5 +1,5 @@
 import React from 'react'
-import Heading from "@/app/_components/PropertiesComponents/Heading_property";
+import Heading from "@/app/_components/PropertiesComponents/SinglePropertyPage/Heading_property";
 
 export const Faqs = ({property}) => {
   return (

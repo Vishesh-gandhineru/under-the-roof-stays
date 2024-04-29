@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useSession } from "../context/useCompare";
 import { redirect } from 'next/navigation'
+import { stringify } from "querystring";
 
 export function postLoginWithOTP (body , setIsLoading , setError , setSuccess) {
     setIsLoading(true);
@@ -27,11 +28,10 @@ export function verifyOTP (body , setOtpVerified){
 
     const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/verify-otp/login`;
     axios.post(url, body)
-    .then((response) => {
-        console.log(response);
+    .then((response) => {  
         if (response.status === 200){
      setOtpVerified(true);
-     localStorage.setItem('Sessiontoken', response.data.data.sessionId);
+     localStorage.setItem('Sessiontoken', JSON.stringify(response.data.data));
      window.location.reload();
     }
         return response;

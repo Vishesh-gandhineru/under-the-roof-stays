@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Button } from "../ui/button";
-import UpcomingBooking from "./DashBoardComponents/UpcomingBooking";
+import { Button } from "../../ui/button";
+import UpcomingBooking from "./UpcomingBooking";
 
 const Dashboard = () => {
   return (

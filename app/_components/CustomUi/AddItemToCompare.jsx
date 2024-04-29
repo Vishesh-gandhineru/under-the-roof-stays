@@ -11,7 +11,7 @@ import {
   DrawerTrigger,
 } from "../ui/drawer"
 
-import Properties_slider from "../PropertiesComponents/Properties_slider"
+import Properties_slider from "../PropertiesComponents/SinglePropertyPage/Properties_slider"
 
 
 
