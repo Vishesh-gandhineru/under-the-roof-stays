@@ -4,7 +4,7 @@ export function FetchProperty (body) {
     const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/property/search`;
     let config = {
         headers: {
-            Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBUElfQUNDRVNTIjp0cnVlLCJpYXQiOjE3MTM4Njg4Mjh9.-vWjwY25KrksOdEzNLDADkv5ZhNYCktoHgyuIQnLHcc`
+            Authorization: `${process.env.AIP_ACCESS_TOKEN}`
         }
     }
     return axios.post(url ,body,config)
@@ -33,4 +33,22 @@ export function FetchSingleProperty (slug) {
         console.log(error);
     }
     )    
+}
+
+
+export function FetchPropertyByLocation () {
+    const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/property/location`;
+    let config = {
+        headers: {
+            Authorization: `${process.env.AIP_ACCESS_TOKEN}`
+        }
+    }
+    return axios.get(url ,config)
+    .then((response) => {
+        return response.data.data;
+    })
+    .catch((error) => {
+        console.log(error);
+    }
+    )    +
 }
