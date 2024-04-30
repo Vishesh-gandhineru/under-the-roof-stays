@@ -7,7 +7,7 @@ import { useEffect, useState , useContext } from "react";
 import AddItemToCompare from "../CustomUi/AddItemToCompare";
 import { useCompare } from "@/app/context/useCompare";
 
-export default function CompareSection() {
+export default function CompareSection({propertiesList}) {
 
  const {compareData ,setCompareData} = useCompare((state)=> ({
     compareData : state.compareData,
@@ -57,7 +57,7 @@ export default function CompareSection() {
           // Otherwise, render the default section
           return (
             <div key={index} className="border rounded-2xl p-8 flex justify-center items-center h-full">
-              <AddItemToCompare />
+              <AddItemToCompare propertiesList={propertiesList} />
             </div>
           );
         })}

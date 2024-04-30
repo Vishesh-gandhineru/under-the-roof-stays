@@ -2,6 +2,12 @@ import { AdvcancedFilterProperty } from "@/app/_components/FIlteringComponents/P
 import PropertiesGrid from "@/app/_components/PropertiesComponents/Properties_grid";
 
 export default function Properties() {
+
+ const  body = {
+    skip: 1,
+    limit: 20,
+ }
+
   return (
     <main className="m-8">
       {/* <div className="h-20 m-8">
@@ -14,7 +20,7 @@ export default function Properties() {
         <div className="w-[30%] border-r-2 border-r-[#bababa] mt-[25px] pt-[15px]  border-solid ">
           <AdvcancedFilterProperty/>
         </div>
-        <PropertiesGrid/>
+        <PropertiesGrid body={body}/>
       </section>
     </main>
   );

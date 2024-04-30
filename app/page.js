@@ -1,7 +1,7 @@
-import Image from "next/image";
+
 import PropertiesGrid from "./_components/PropertiesComponents/Properties_grid";
 import {HomePageFilter} from "./_components/FIlteringComponents/HomePageFilter";
-import { Toaster } from "./_components/ui/sonner";
+
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       </div>
     <HomePageFilter/>
     <PropertiesGrid/>
-    <Toaster />
+   
     </main>
 
     

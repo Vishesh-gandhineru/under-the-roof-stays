@@ -15,7 +15,7 @@ import Properties_slider from "../PropertiesComponents/SinglePropertyPage/Proper
 
 
 
-export default function AddItemToCompare() {
+export default function AddItemToCompare({propertiesList}) {
 
   return (
     <Drawer>
@@ -23,7 +23,7 @@ export default function AddItemToCompare() {
               <PlusCircle/>    
       </DrawerTrigger>
       <DrawerContent className="px-8 py-4">
-        <Properties_slider />
+        <Properties_slider propertiesList={propertiesList} />
       </DrawerContent>
     </Drawer>
   )
