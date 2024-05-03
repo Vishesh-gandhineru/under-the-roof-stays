@@ -4,6 +4,7 @@ import CompareButton from "../CustomUi/CompareButtom";
 import { FetchProperty } from "@/app/_util/PropertiesAPI";
 
 
+
 export default async function PropertiesGrid({body = {skip: 1,
   limit: 9}}) {
   

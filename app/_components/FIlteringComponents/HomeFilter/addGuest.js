@@ -115,11 +115,11 @@ export function AddGuest() {
     >
       <div className="flex justify-between items-center">
         <Label htmlFor="adults" className="font-bold text-[18px] capitalize">
-          Adults <CustomTooltip content={"tooltip"} tooltipIcon={<Info />}/>{" "}
+          Adults
         </Label>
         <div className="flex gap-3">
-          <button onClick={handleAdultAddGuest} value="add">
-            <Plus className="w-[80%]" />
+          <button onClick={handleAdultRemoveGuest} value="remove">
+            <Minus className="w-[80%]" />
           </button>
           <Input
             className="w-[50px]"
@@ -129,8 +129,8 @@ export function AddGuest() {
             value={AdultGuestCount}
             onChange={handleAdultChange}
           />
-          <button onClick={handleAdultRemoveGuest} value="remove">
-            <Minus className="w-[80%]" />
+          <button onClick={handleAdultAddGuest} value="add">
+            <Plus className="w-[80%]" />
           </button>
         </div>
       </div>
@@ -140,8 +140,8 @@ export function AddGuest() {
           Children
         </Label>
         <div className="flex gap-3">
-          <button onClick={handleChildAddGuest} value="add">
-            <Plus className="w-[80%]" />
+        <button onClick={handleChildRemoveGuest} value="remove">
+            <Minus className="w-[80%]" />
           </button>
           <Input
             className="w-[50px]"
@@ -151,8 +151,9 @@ export function AddGuest() {
             value={ChildGuestCount}
             onChange={handleChildChange}
           />
-          <button onClick={handleChildRemoveGuest} value="remove">
-            <Minus className="w-[80%]" />
+          
+          <button onClick={handleChildAddGuest} value="add">
+            <Plus className="w-[80%]" />
           </button>
         </div>
       </div>
@@ -162,8 +163,8 @@ export function AddGuest() {
           Pets
         </Label>
         <div className="flex gap-3">
-          <button onClick={handlePetsAddGuest} value="add">
-            <Plus className="w-[80%]" />
+        <button onClick={handlePetsRemoveGuest} value="remove">
+            <Minus className="w-[80%]" />
           </button>
           <Input
             className="w-[50px]"
@@ -173,9 +174,10 @@ export function AddGuest() {
             value={PetsGuestCount}
             onChange={handlePetsChange}
           />
-          <button onClick={handlePetsRemoveGuest} value="remove">
-            <Minus className="w-[80%]" />
+           <button onClick={handlePetsAddGuest} value="add">
+            <Plus className="w-[80%]" />
           </button>
+        
         </div>
       </div>
       <Button type="submit">ADD</Button>

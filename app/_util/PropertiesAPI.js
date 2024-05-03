@@ -50,5 +50,24 @@ export function FetchPropertyByLocation () {
     .catch((error) => {
         console.log(error);
     }
-    )    +
+    )    
+}
+
+
+export function FetchPropertyForLocationBar (locationName) {
+    
+    const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/property/search/${locationName}`;
+    let config = {
+        headers: {
+            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBUElfQUNDRVNTIjp0cnVlLCJpYXQiOjE3MTM4Njg4Mjh9.-vWjwY25KrksOdEzNLDADkv5ZhNYCktoHgyuIQnLHcc"
+        }
+    }
+    return axios.get(url ,config)
+    .then((response) => {
+        return response.data.data;
+    })
+    .catch((error) => {
+        console.log(error);
+    }
+    )
 }
