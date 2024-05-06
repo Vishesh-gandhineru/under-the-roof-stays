@@ -9,6 +9,7 @@ import { FetchSingleProperty } from "@/app/_util/PropertiesAPI";
 export default async function PropertiesSinglePage({ params }) {
  
    const SingleProperty = await FetchSingleProperty(params.slug);
+
    
   
   return (

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { set } from 'date-fns';
 
 export function FetchProperty (body) {
     const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/property/search`;
@@ -19,7 +20,7 @@ export function FetchProperty (body) {
 
 
 export function FetchSingleProperty (slug) {
-    const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/property?slug=${slug}`;
+    const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/property/${slug}`;
     let config = {
         headers: {
             Authorization: `${process.env.AIP_ACCESS_TOKEN}`
@@ -62,6 +63,7 @@ export function FetchPropertyForLocationBar (locationName) {
             Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBUElfQUNDRVNTIjp0cnVlLCJpYXQiOjE3MTM4Njg4Mjh9.-vWjwY25KrksOdEzNLDADkv5ZhNYCktoHgyuIQnLHcc"
         }
     }
+ 
     return axios.get(url ,config)
     .then((response) => {
         return response.data.data;

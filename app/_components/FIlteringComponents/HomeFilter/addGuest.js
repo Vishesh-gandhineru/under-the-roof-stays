@@ -34,9 +34,7 @@ export function AddGuest() {
     }
   }, [1]);
 
-  const GuestText = guestDataAvailable
-    ? `Adult : ${GuestDataFromLocalStorage.AdultGuestCount} , Child : ${GuestDataFromLocalStorage.ChildGuestCount} , Pets : ${GuestDataFromLocalStorage.PetsGuestCount}`
-    : "Add Guest";
+  const GuestText = guestDataAvailable ? `Adult : ${AdultGuestCount} , Child : ${ChildGuestCount} , Pets : ${PetsGuestCount}` : "Add Guest";
 
   
 
@@ -99,8 +97,10 @@ export function AddGuest() {
       "GuestData",
       JSON.stringify({ AdultGuestCount, ChildGuestCount, PetsGuestCount })
     );
+    setOpen(false);
   };
 
+ 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
