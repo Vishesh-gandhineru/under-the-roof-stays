@@ -1,12 +1,11 @@
-import axios from "axios";
-import { useSession } from "../context/useCompare";
-import { redirect } from 'next/navigation'
-import { stringify } from "querystring";
 
-export function postLoginWithOTP (body , setIsLoading , setError , setSuccess) {
+import axios from "axios";
+
+
+export  function postLoginWithOTP (body , setIsLoading , setError , setSuccess) {
     setIsLoading(true);
     const url = `http://3.107.33.150/api/v1/user/generate-otp/login`; 
-    axios.post(url, body)
+     axios.post(url, body)
     .then((response) => {
         console.log(response);
         setIsLoading(false);
@@ -24,7 +23,7 @@ export function postLoginWithOTP (body , setIsLoading , setError , setSuccess) {
     )
 }
 
-export function verifyOTP (body , setOtpVerified){
+export  function verifyOTP (body , setOtpVerified){
 
     const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/verify-otp/login`;
     axios.post(url, body)
@@ -32,6 +31,7 @@ export function verifyOTP (body , setOtpVerified){
         if (response.status === 200){
      setOtpVerified(true);
      localStorage.setItem('Sessiontoken', JSON.stringify(response.data.data));
+
      window.location.reload();
     }
         return response;
@@ -43,7 +43,7 @@ export function verifyOTP (body , setOtpVerified){
 }
 
 
-export function postRegistertion (body) {
+export  function postRegistertion (body) {
     const registerUrl = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/register`;
     axios.post(url, body)
     .then((response) => {
@@ -56,7 +56,7 @@ export function postRegistertion (body) {
     )
 }
 
-export function GenerateOtpForResgistrastion (body , setIsLoading , setError , setSuccess) {
+export  function GenerateOtpForResgistrastion (body , setIsLoading , setError , setSuccess) {
     setIsLoading(true);
     const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/generate-otp/register`; 
     axios.post(url, {
