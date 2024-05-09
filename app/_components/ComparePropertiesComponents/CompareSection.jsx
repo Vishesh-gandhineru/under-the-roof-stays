@@ -43,7 +43,7 @@ export default function CompareSection({propertiesList}) {
               <div key={property.slug} className="border rounded-2xl h-fit flex flex-col gap-8 justify-center items-center relative pb-5">
                 <div>
                 <Link className="relative" href={`/properties/${property.slug}`}>
-                <img src={property.images[0].url} alt="property image" className="rounded-2xl h-[300px] w-screen object-cover" />
+                <img src={property?.images[0]?.url} alt="property image" className="rounded-2xl h-[300px] w-screen object-cover" />
               </Link>
                 </div>
                 <div>

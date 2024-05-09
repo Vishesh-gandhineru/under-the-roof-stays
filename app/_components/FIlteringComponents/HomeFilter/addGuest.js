@@ -16,7 +16,7 @@ import CustomTooltip from "../../CustomUi/Customtooltips";
 import { Label } from "../../ui/label";
 import { set } from "date-fns";
 
-export function AddGuest() {
+export function AddGuest({setGuestFromSessionStorage}) {
   const [open, setOpen] = useState(false);
   const [guestDataAvailable, setGuestDataAvailable] = useState(false);
   const [GuestDataFromLocalStorage, setGuestDataFromLocalStorage] = useState(
@@ -27,16 +27,14 @@ export function AddGuest() {
   const [PetsGuestCount, setPetsGuestCount] = useState(0);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("GuestData"));
+    const data = JSON.parse(sessionStorage.getItem("GuestData"));
     if (data) {
       setGuestDataAvailable(true);
       setGuestDataFromLocalStorage(data);
     }
-  }, [1]);
+  }, []);
 
-  const GuestText = guestDataAvailable ? `Adult : ${AdultGuestCount} , Child : ${ChildGuestCount} , Pets : ${PetsGuestCount}` : "Add Guest";
-
-  
+ 
 
   useEffect(() => {
     const data = JSON.parse(sessionStorage.getItem("GuestData"));
@@ -45,7 +43,7 @@ export function AddGuest() {
       setChildGuestCount(data.ChildGuestCount);
       setPetsGuestCount(data.PetsGuestCount);
     }
-  }, [1]);
+  }, [GuestDataFromLocalStorage]);
 
   const handleAdultAddGuest = (event) => {
     event.preventDefault();
@@ -53,6 +51,7 @@ export function AddGuest() {
   };
   const handleAdultChange = (event) => {
     event.preventDefault();
+
     setAdultGuestCount(event.target.value);
   };
 
@@ -88,6 +87,7 @@ export function AddGuest() {
 
   const handlePetsChange = (event) => {
     event.preventDefault();
+ 
     setPetsGuestCount(event.target.value);
   };
 
@@ -98,6 +98,8 @@ export function AddGuest() {
       JSON.stringify({ AdultGuestCount, ChildGuestCount, PetsGuestCount })
     );
     setOpen(false);
+    setGuestDataAvailable(true);
+    setGuestFromSessionStorage({ AdultGuestCount, ChildGuestCount, PetsGuestCount });
   };
 
  
@@ -105,7 +107,7 @@ export function AddGuest() {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button className="h-[inherit]" variant="outline">
-          {GuestText}
+        {guestDataAvailable ? `Adult : ${AdultGuestCount} , Child : ${ChildGuestCount} , Pets : ${PetsGuestCount}` : "Add Guest"}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="sm:max-w-[425px]">
@@ -184,145 +186,5 @@ export function AddGuest() {
     </form>
       </PopoverContent>
     </Popover>
-  );
-}
-function ProfileForm({ className }) {
-  const [AdultGuestCount, setAdultGuestCount] = useState(0);
-  const [ChildGuestCount, setChildGuestCount] = useState(0);
-  const [PetsGuestCount, setPetsGuestCount] = useState(0);
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("GuestData"));
-    if (data) {
-      setAdultGuestCount(data.AdultGuestCount);
-      setChildGuestCount(data.ChildGuestCount);
-      setPetsGuestCount(data.PetsGuestCount);
-    }
-  }, [1]);
-
-  const handleAdultAddGuest = (event) => {
-    event.preventDefault();
-    setAdultGuestCount(AdultGuestCount + 1);
-  };
-  const handleAdultChange = (event) => {
-    event.preventDefault();
-    setAdultGuestCount(event.target.value);
-  };
-
-  const handleAdultRemoveGuest = (event) => {
-    event.preventDefault();
-    setAdultGuestCount(AdultGuestCount > 0 ? AdultGuestCount - 1 : 0);
-  };
-
-  const handleChildAddGuest = (event) => {
-    event.preventDefault();
-    setChildGuestCount(ChildGuestCount + 1);
-  };
-
-  const handleChildRemoveGuest = (event) => {
-    event.preventDefault();
-    setChildGuestCount(ChildGuestCount > 0 ? ChildGuestCount - 1 : 0);
-  };
-
-  const handleChildChange = (event) => {
-    event.preventDefault();
-    setChildGuestCount(event.target.value);
-  };
-
-  const handlePetsAddGuest = (event) => {
-    event.preventDefault();
-    setPetsGuestCount(PetsGuestCount + 1);
-  };
-
-  const handlePetsRemoveGuest = (event) => {
-    event.preventDefault();
-    setPetsGuestCount(PetsGuestCount > 0 ? PetsGuestCount - 1 : 0);
-  };
-
-  const handlePetsChange = (event) => {
-    event.preventDefault();
-    setPetsGuestCount(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    localStorage.setItem(
-      "GuestData",
-      JSON.stringify({ AdultGuestCount, ChildGuestCount, PetsGuestCount })
-    );
-  };
-
-  return (
-    <form
-      onSubmit={handleSubmit}
-      className={cn("grid items-start gap-4", className)}
-    >
-      <div className="flex justify-between items-center">
-        <Label htmlFor="adults" className="font-bold text-[18px] capitalize">
-          Adults <CustomTooltip content={"tooltip"} />{" "}
-        </Label>
-        <div className="flex gap-3">
-          <button onClick={handleAdultAddGuest} value="add">
-            <Plus className="w-[80%]" />
-          </button>
-          <Input
-            className="w-[50px]"
-            type="number"
-            placeholder="0"
-            name="adults"
-            value={AdultGuestCount}
-            onChange={handleAdultChange}
-          />
-          <button onClick={handleAdultRemoveGuest} value="remove">
-            <Minus className="w-[80%]" />
-          </button>
-        </div>
-      </div>
-
-      <div className="flex justify-between items-center">
-        <Label htmlFor="children" className="font-bold text-[18px] capitalize ">
-          Children
-        </Label>
-        <div className="flex gap-3">
-          <button onClick={handleChildAddGuest} value="add">
-            <Plus className="w-[80%]" />
-          </button>
-          <Input
-            className="w-[50px]"
-            type="number"
-            placeholder="0"
-            name="child"
-            value={ChildGuestCount}
-            onChange={handleChildChange}
-          />
-          <button onClick={handleChildRemoveGuest} value="remove">
-            <Minus className="w-[80%]" />
-          </button>
-        </div>
-      </div>
-
-      <div className="flex justify-between items-center">
-        <Label htmlFor="pets" className="font-bold text-[18px] capitalize">
-          Pets
-        </Label>
-        <div className="flex gap-3">
-          <button onClick={handlePetsAddGuest} value="add">
-            <Plus className="w-[80%]" />
-          </button>
-          <Input
-            className="w-[50px]"
-            type="number"
-            placeholder="0"
-            name="pets"
-            value={PetsGuestCount}
-            onChange={handlePetsChange}
-          />
-          <button onClick={handlePetsRemoveGuest} value="remove">
-            <Minus className="w-[80%]" />
-          </button>
-        </div>
-      </div>
-      <Button type="submit">ADD</Button>
-    </form>
   );
 }

@@ -1,4 +1,5 @@
 "use client"
+
 import { create } from "zustand";
 
 const getSulgFromLocalStorage = localStorage.getItem("SearchSlug");

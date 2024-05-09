@@ -1,14 +1,16 @@
 "use client"
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { useSession } from '@/app/context/useSession';
+import {useSession} from '../../context/useSession'
 import { logout } from '@/app/_util/LoginAPI';
+
+
 
 const Header = () => {
  
     const session = useSession(state => state.session);
-    const sessionkey = session.sessionId
+    const sessionkey = session.sessionId  
 
     return (
         <header className="bg-gray-800">

@@ -8,7 +8,7 @@ export const AdvcancedFilterProperty = () => {
     <section className="pr-[20px] ">
       <PriceMinToMax />
       <CheckboxDemo />
-      <PriceRange />
+      {/* <PriceRange /> */}
     </section>
   );
 };

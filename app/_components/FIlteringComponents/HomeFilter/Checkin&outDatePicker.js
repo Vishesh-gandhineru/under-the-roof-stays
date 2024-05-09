@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
+
 import { addDays, format } from "date-fns";
 import { DateRange } from "react-day-picker";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import { cn } from '../../../../lib/utils'
 import { Button } from "../../ui/button";
 import { Calendar } from "../../ui/calendar";
@@ -14,10 +14,22 @@ import {
 } from "../../ui/popover";
 
 export function CheckinOutDatePicker({ className }) {
+
+  const CheckinDateFromLocal = localStorage.getItem("Checkin-data");
+  const CheckoutDateFromLocal = localStorage.getItem("Checkout-data");
+  
   const [date, setDate] = useState({
-    from: new Date(),
-    to: addDays(new Date(), 1),
+    from: CheckinDateFromLocal ? new Date(CheckinDateFromLocal) : new Date(),
+    to: CheckoutDateFromLocal ? new Date(CheckoutDateFromLocal) : addDays(new Date(), 1),
   });
+  
+  useEffect(() => {  
+    localStorage.setItem("Checkin-data", date.from.toString());
+    localStorage.setItem("Checkout-data", date.to.toString());     
+  }, [date]);
+
+ 
+console.log(CheckinDateFromLocal , CheckoutDateFromLocal)
 
   return (
     <div className={cn("grid gap-2", className)}>

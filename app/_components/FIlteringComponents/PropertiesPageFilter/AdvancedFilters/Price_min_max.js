@@ -1,4 +1,6 @@
 import React from "react";
+import { Button } from "@/app/_components/ui/button";
+import Link from "next/link";
 
 export const PriceMinToMax = () => {
   return (
@@ -16,10 +18,10 @@ export const PriceMinToMax = () => {
           type="number"
         />
       </div>
-      <div className="flex justify-center items-center  mt-[10px]">
-        <button className="w-[100%] text-[14px] py-[10px] rounded-[5px] border-[1px] border-solid border-[#1f1f1f] hover:bg-[#000] hover:text-[#fff]">
-          Submit
-        </button>
+      <div className="flex justify-start items-start  mt-[10px]">
+        <Button asChild>
+          <Link href="/properties">Search</Link>
+        </Button>
       </div>
     </div>
   );

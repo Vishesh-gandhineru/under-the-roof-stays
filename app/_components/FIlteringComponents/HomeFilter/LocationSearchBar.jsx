@@ -92,7 +92,7 @@ export default function LocationSearchBar() {
               <CommandEmpty>No Property found.</CommandEmpty>
             )}
             <CommandGroup>
-              {FetchLocation.length > 0 && (
+              {FetchLocation?.length > 0 && (
                 <CommandItem
                   value={FetchLocation[0]?.general.city}
                   onSelect={(currentValue) => {
@@ -124,7 +124,7 @@ export default function LocationSearchBar() {
                   </div>
                 </CommandItem>
               )}
-              {FetchLocation.map((item) => {
+              {FetchLocation?.map((item) => {
                 return (
                   <CommandItem
                     className="fetched-location"

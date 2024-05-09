@@ -5,7 +5,7 @@ export function FetchProperty (body) {
     const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/property/search`;
     let config = {
         headers: {
-            Authorization: `${process.env.AIP_ACCESS_TOKEN}`
+            Authorization: `${process.env.NEXT_PUBLIC_AIP_ACCESS_TOKEN}`
         }
     }
     return axios.post(url ,body,config)
@@ -23,7 +23,7 @@ export function FetchSingleProperty (slug) {
     const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/property/${slug}`;
     let config = {
         headers: {
-            Authorization: `${process.env.AIP_ACCESS_TOKEN}`
+            Authorization: `${process.env.NEXT_PUBLIC_AIP_ACCESS_TOKEN}`
         }
     }
     return axios.get(url ,config)
@@ -41,7 +41,7 @@ export function FetchPropertyByLocation () {
     const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/property/location`;
     let config = {
         headers: {
-            Authorization: `${process.env.AIP_ACCESS_TOKEN}`
+            Authorization: `${process.env.NEXT_PUBLIC_AIP_ACCESS_TOKEN}`
         }
     }
     return axios.get(url ,config)
@@ -60,7 +60,7 @@ export function FetchPropertyForLocationBar (locationName) {
     const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/property/search/${locationName}`;
     let config = {
         headers: {
-            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBUElfQUNDRVNTIjp0cnVlLCJpYXQiOjE3MTM4Njg4Mjh9.-vWjwY25KrksOdEzNLDADkv5ZhNYCktoHgyuIQnLHcc"
+            Authorization: `${process.env.NEXT_PUBLIC_AIP_ACCESS_TOKEN}`
         }
     }
  

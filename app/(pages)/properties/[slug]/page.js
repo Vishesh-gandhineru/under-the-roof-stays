@@ -4,6 +4,7 @@ import Heading from "@/app/_components/PropertiesComponents/SinglePropertyPage/H
 import { HeroBanner } from "@/app/_components/PropertiesComponents/SinglePropertyPage/Hero_banner";
 import { LeftSection } from "@/app/_components/PropertiesComponents/SinglePropertyPage/Left_section";
 import { FetchSingleProperty } from "@/app/_util/PropertiesAPI";
+import BookingForm from "@/app/_components/PropertyBooking/BookingForm";
 
 // import
 export default async function PropertiesSinglePage({ params }) {
@@ -23,7 +24,9 @@ export default async function PropertiesSinglePage({ params }) {
         <div className="flex justify-between mt-[5vh]">
       
          <LeftSection property={SingleProperty}/>
-          <div>Right</div>
+          <div>
+            <BookingForm propertyId={SingleProperty.propertyId} slug={params.slug}  />
+          </div>
         </div>
       </div>
     </main>

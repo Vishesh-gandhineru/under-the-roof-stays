@@ -1,6 +1,6 @@
 
-import { Badge } from "/@/app/_components/ui/badge"
-import { CardContent , Card } from "@/@/app/_components/ui/card"
+import { Badge } from "@/app/_components/ui/badge"
+import { CardContent , Card } from "@/app/_components/ui/card"
 
 
 
