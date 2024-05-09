@@ -6,6 +6,7 @@ import { Textarea } from "@/app/_components/ui/textarea"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/app/_components/ui/select"
 import { Button } from "@/app/_components/ui/button"
 import { Separator } from "@/app/_components/ui/separator"
+import SelectedProperty from "@/app/_components/CheckoutComponent/SelectedProperty"
 
 export default function Component({ params }) {
   return (
@@ -63,26 +64,7 @@ export default function Component({ params }) {
             </div>
           </div>
           <Separator className="my-4" />
-          <div className="space-y-2">
-            <div className="flex items-center gap-4">
-              <img
-                alt="Product Image"
-                className="rounded-md"
-                height="64"
-                src="/placeholder.svg"
-                style={{
-                  aspectRatio: "64/64",
-                  objectFit: "cover",
-                }}
-                width="64"
-              />
-              <div>
-                <p className="font-medium">{params.propertyid}</p>
-                <p className="text-gray-500">Quantity: 1</p>
-              </div>
-              <p className="ml-auto font-medium">$999.99</p>
-            </div>
-          </div>
+          <SelectedProperty />
         </div>
       </main>
      

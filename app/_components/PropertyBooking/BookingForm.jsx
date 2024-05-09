@@ -145,7 +145,7 @@ const TempButtonClick = () => {
         <p>{CheckAvailbilityStatus}</p>
 
         {!PropertyAvailableToBook && <Button onClick={TempButtonClick}>Temp Check Availability Return True</Button>}
-        {PropertyAvailableToBook && <Button asChild ><Link href={`/checkout?propertyid=${propertyId}`}>Checkout</Link></Button>}
+        {PropertyAvailableToBook && <Button asChild ><Link href={`/checkout?propertyid=${propertyId}&&slug=${slug}`}>Checkout</Link></Button>}
       </CardFooter>
     </Card>
   )
