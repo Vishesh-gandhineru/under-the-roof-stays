@@ -4,7 +4,7 @@ import CompareButton from "../CustomUi/CompareButtom";
 import { FetchProperty } from "@/app/_util/PropertiesAPI";
 
 
-export default async function PropertiesGrid({body = {skip: 1,
+export default async function PropertiesGrid({body = {skip: 0,
   limit: 9}}) {
   
   const propertiesListAPI = await FetchProperty(body);
@@ -12,7 +12,7 @@ export default async function PropertiesGrid({body = {skip: 1,
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 relative">
-        {propertiesListAPI.map((property) => (
+        {propertiesListAPI?.map((property) => (
           <section key={property._id}>
             <div className="border rounded-2xl border-gray text-black flex flex-col gap-5 relative">
               <Link className="relative" href={`/properties/${property.slug}`}>
