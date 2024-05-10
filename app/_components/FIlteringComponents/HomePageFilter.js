@@ -1,11 +1,17 @@
 "use client"
 import React from "react";
-import { CheckinOutDatePicker } from "./HomeFilter/Checkin&outDatePicker";
+// import CheckinOutDatePicker  from "./HomeFilter/Checkin&outDatePicker";
 import { AddGuest } from "./HomeFilter/addGuest";
 import LocationSearchBar from "./HomeFilter/LocationSearchBar";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { useSearchSlug } from "@/app/context/useSearchSlug";
+import dynamic from "next/dynamic";
+
+const CheckinOutDatePicker = dynamic(() => import("./HomeFilter/Checkin&outDatePicker"), {
+  ssr: false,
+
+});
 
 export const HomePageFilter = () => {
 

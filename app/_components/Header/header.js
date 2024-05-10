@@ -1,17 +1,11 @@
-"use client"
-
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import {useSession} from '../../context/useSession'
-import { logout } from '@/app/_util/LoginAPI';
+import dynamic from 'next/dynamic';
+const HeaderLoginButton = dynamic(() => import('./HeaderLoginButton'), {
+    ssr: false
+});
 
-
-
-const Header = () => {
- 
-    const session = useSession(state => state.session);
-    const sessionkey = session.sessionId  
-
+const Header = () => { 
     return (
         <header className="bg-gray-800">
             <nav className="flex items-center justify-between px-4 py-2">
@@ -21,10 +15,7 @@ const Header = () => {
                     <Link href="/about" className="ml-4 text-white">About</Link>
                     <Link href="/compare" className="ml-4 text-white">Compare</Link>
                 </div>
-                <div className="flex items-center">
-                    {sessionkey && <Link href="/dashboard" className="ml-4 text-white">Dashboard</Link>}
-                    {!sessionkey ? <Link href="/login" className="ml-4 text-white">Login</Link> : <button onClick={()=> logout(session)} className="ml-4 text-white">Logout</button>}
-                </div>
+               <HeaderLoginButton />
             </nav>
         </header>
     );

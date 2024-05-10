@@ -16,7 +16,7 @@ import CustomTooltip from "../../CustomUi/Customtooltips";
 import { Label } from "../../ui/label";
 import { set } from "date-fns";
 
-export function AddGuest({setGuestFromSessionStorage}) {
+export function AddGuest({setGuestFromSessionStorage = false}) {
   const [open, setOpen] = useState(false);
   const [guestDataAvailable, setGuestDataAvailable] = useState(false);
   const [GuestDataFromLocalStorage, setGuestDataFromLocalStorage] = useState(
@@ -99,7 +99,7 @@ export function AddGuest({setGuestFromSessionStorage}) {
     );
     setOpen(false);
     setGuestDataAvailable(true);
-    setGuestFromSessionStorage({ AdultGuestCount, ChildGuestCount, PetsGuestCount });
+    setGuestFromSessionStorage && setGuestFromSessionStorage({ AdultGuestCount, ChildGuestCount, PetsGuestCount });
   };
 
  

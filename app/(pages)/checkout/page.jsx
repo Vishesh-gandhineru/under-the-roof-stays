@@ -1,5 +1,4 @@
 
-import Link from "next/link"
 import { Label } from "@/app/_components/ui/label"
 import { Input } from "@/app/_components/ui/input"
 import { Textarea } from "@/app/_components/ui/textarea"
@@ -7,8 +6,9 @@ import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@
 import { Button } from "@/app/_components/ui/button"
 import { Separator } from "@/app/_components/ui/separator"
 import SelectedProperty from "@/app/_components/CheckoutComponent/SelectedProperty"
+import { Suspense } from "react"
 
-export default function Component({ params }) {
+export default function Component() {
   return (
     <div className="flex flex-col min-h-screen">     
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-8 p-8">
@@ -64,7 +64,9 @@ export default function Component({ params }) {
             </div>
           </div>
           <Separator className="my-4" />
+          <Suspense>
           <SelectedProperty />
+          </Suspense>
         </div>
       </main>
      

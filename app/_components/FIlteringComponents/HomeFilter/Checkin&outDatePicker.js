@@ -13,10 +13,10 @@ import {
   PopoverTrigger,
 } from "../../ui/popover";
 
-export function CheckinOutDatePicker({ className }) {
+export default function CheckinOutDatePicker({ className }) {
 
-  const CheckinDateFromLocal = localStorage.getItem("Checkin-data");
-  const CheckoutDateFromLocal = localStorage.getItem("Checkout-data");
+  let CheckinDateFromLocal = localStorage.getItem("Checkin-data");
+  let CheckoutDateFromLocal = localStorage.getItem("Checkout-data");
   
   const [date, setDate] = useState({
     from: CheckinDateFromLocal ? new Date(CheckinDateFromLocal) : new Date(),
@@ -24,12 +24,9 @@ export function CheckinOutDatePicker({ className }) {
   });
   
   useEffect(() => {  
-    localStorage.setItem("Checkin-data", date.from.toString());
-    localStorage.setItem("Checkout-data", date.to.toString());     
+    localStorage.setItem("Checkin-data", date?.from?.toString());
+    localStorage.setItem("Checkout-data", date?.to?.toString());     
   }, [date]);
-
- 
-console.log(CheckinDateFromLocal , CheckoutDateFromLocal)
 
   return (
     <div className={cn("grid gap-2", className)}>
