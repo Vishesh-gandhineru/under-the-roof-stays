@@ -2,6 +2,7 @@
 import Link from "next/link";
 import CompareButton from "../CustomUi/CompareButtom";
 import { FetchProperty } from "@/app/_util/PropertiesAPI";
+import WeatherPopover from "../CustomUi/WeatherPopover";
 
 
 export default async function PropertiesGrid({body = {skip: 0,
@@ -22,6 +23,7 @@ export default async function PropertiesGrid({body = {skip: 0,
                   className="rounded-2xl w-full h-[300px] object-cover object-center"
                 />
               </Link>
+              <WeatherPopover property={property} />
               <CompareButton property={property} />
               <div className="flex flex-col gap-3 p-4">
                 <Link

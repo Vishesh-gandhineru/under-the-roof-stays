@@ -45,17 +45,17 @@ useEffect(() => {
 
 
 const formatDate = (date) => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
+    const year = date?.getFullYear();
+    const month = String(date?.getMonth() + 1)?.padStart(2, "0");
+    const day = String(date?.getDate())?.padStart(2, "0");
     return `${year}-${month}-${day}`;
 };
 
 const AvailabilityData = {  
     "propertyId": propertyId.toString(), //required
     "slug": slug.toString(), //required
-    "checkIn": formatDate(date.from),  //required format = YYYY-MM-DD
-    "checkOut": formatDate(date.to),  //required format = YYYY-MM-DD
+    "checkIn": formatDate(date?.from),  //required format = YYYY-MM-DD
+    "checkOut": formatDate(date?.to),  //required format = YYYY-MM-DD
     "adults": GuestFromSessionStorage?.AdultGuestCount,  //required format = int
     "children": GuestFromSessionStorage?.ChildGuestCount, //optional or send 0 format = int
     "babies": 0, //optional or send 0 format = int
@@ -85,6 +85,7 @@ const CheckAvailbility = async () => {
           setCheckAvailbilityStatus("The Property is already booked for the selected dates")
          }
           console.log(error.response.status);
+          console.log(error)
          
         } else if (error.request) {
           // The request was made but no response was received
