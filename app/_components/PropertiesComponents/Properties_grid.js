@@ -2,7 +2,7 @@
 import Link from "next/link";
 import CompareButton from "../CustomUi/CompareButtom";
 import { FetchProperty } from "@/app/_util/PropertiesAPI";
-import WeatherPopover from "../CustomUi/WeatherPopover";
+import WeatherPopover from "../WeatherComponent/WeatherPopover";
 
 
 export default async function PropertiesGrid({body = {skip: 0,

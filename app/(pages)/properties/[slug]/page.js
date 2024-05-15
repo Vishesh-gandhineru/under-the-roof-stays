@@ -5,6 +5,7 @@ import { HeroBanner } from "@/app/_components/PropertiesComponents/SinglePropert
 import { LeftSection } from "@/app/_components/PropertiesComponents/SinglePropertyPage/Left_section";
 import { FetchSingleProperty } from "@/app/_util/PropertiesAPI";
 import BookingForm from "@/app/_components/PropertyBooking/BookingForm";
+import WeatherCard from "@/app/_components/WeatherComponent/WeatherCard";
 
 // import
 export default async function PropertiesSinglePage({ params }) {
@@ -24,8 +25,9 @@ export default async function PropertiesSinglePage({ params }) {
         <div className="flex justify-between mt-[5vh]">
       
          <LeftSection property={SingleProperty}/>
-          <div>
+          <div className="flex flex-col gap-4">
             <BookingForm propertyId={SingleProperty.propertyId} slug={params.slug}  />
+            <WeatherCard property={SingleProperty}/>
           </div>
         </div>
       </div>

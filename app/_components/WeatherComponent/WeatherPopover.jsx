@@ -24,6 +24,8 @@ export default function WeatherPopover({ property }) {
     setShouldFetch(true);
   }
 
+  const kelvin = data?.main.temp;
+  const celcius = kelvin - 273;
 
   return (
     <Popover>
@@ -44,8 +46,10 @@ export default function WeatherPopover({ property }) {
           <div>
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <div className="text-4xl font-bold">{data?.main?.temp} Kelvin</div>
-                <div className="text-gray-500 dark:text-gray-400">
+              
+                <div className="text-4xl font-bold flex flex-row gap-2 justify-center items-center"><ThermometerIcon className="w-6 h-6" />{parseFloat(celcius).toFixed(2)}°C</div>
+                <div className="text-gray-500 dark:text-gray-400 flex flex-row gap-3 justify-center items-center">
+                <img src={`https://openweathermap.org/img/wn/${data?.weather[0].icon}@2x.png`} />
                   {data?.weather[0].description}
                 </div>
               </div>
