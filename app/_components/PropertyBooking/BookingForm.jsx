@@ -63,47 +63,47 @@ const AvailabilityData = {
 };
 
 
-const CheckAvailbility = async () => {
-  setLoading(true)
-  await axios.post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/booking/availablity`, AvailabilityData, {
-      headers: {
-        "Authorization": process.env.NEXT_PUBLIC_AIP_ACCESS_TOKEN
-      }, 
+// const CheckAvailbility = async () => {
+//   setLoading(true)
+//   await axios.post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/booking/availablity`, AvailabilityData, {
+//       headers: {
+//         "Authorization": process.env.NEXT_PUBLIC_AIP_ACCESS_TOKEN
+//       }, 
      
-    })
-   .then (
-      (response) => {
-        setLoading(false)
-        console.log(response.data);
-        console.log("This is response data")
-      }
+//     })
+//    .then (
+//       (response) => {
+//         setLoading(false)
+//         console.log(response.data);
+//         console.log("This is response data")
+//       }
     
-   ).catch(function (error) {
-      setLoading(false)
-        if (error.response) {
-         if (error.response.status === 409) {
-          setCheckAvailbilityStatus("The Property is already booked for the selected dates")
-         }
-          console.log(error.response.status);
-          console.log(error)
+//    ).catch(function (error) {
+//       setLoading(false)
+//         if (error.response) {
+//          if (error.response.status === 409) {
+//           setCheckAvailbilityStatus("The Property is already booked for the selected dates")
+//          }
+//           console.log(error.response.status);
+//           console.log(error)
          
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message);
-        }
-        console.log(error.config);
-      });
-     }  
+//         } else if (error.request) {
+//           // The request was made but no response was received
+//           // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+//           // http.ClientRequest in node.js
+//           console.log(error.request);
+//         } else {
+//           // Something happened in setting up the request that triggered an Error
+//           console.log('Error', error.message);
+//         }
+//         console.log(error.config);
+//       });
+//      }  
 
-const handleButtonClick = () => {
-  console.log("button clicked")
-  CheckAvailbility();
-};
+// const handleButtonClick = () => {
+//   console.log("button clicked")
+//   CheckAvailbility();
+// };
 
 
 const TempButtonClick = () => {
@@ -146,7 +146,7 @@ const TempButtonClick = () => {
         <p>{CheckAvailbilityStatus}</p>
 
         {!PropertyAvailableToBook && <Button onClick={TempButtonClick}>Temp Check Availability Return True</Button>}
-        {PropertyAvailableToBook && <Button asChild ><Link href={`/checkout?propertyid=${propertyId}&&slug=${slug}`}>Checkout</Link></Button>}
+        {/* {PropertyAvailableToBook && <Button asChild ><Link href={`/checkout?propertyid=${propertyId}&&slug=${slug}`}>Checkout</Link></Button>} */}
       </CardFooter>
     </Card>
   )
