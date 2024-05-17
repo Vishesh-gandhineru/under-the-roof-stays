@@ -42,7 +42,7 @@ export default function WeatherCard({property}) {
       <Card className="w-full max-w-md">
         <CardHeader className="flex items-center justify-between">
           <div className="space-y-1 flex flex-col justify-center items-center">
-            <CardTitle>Today's Weather</CardTitle>
+            <CardTitle>Today&apos;s Weather</CardTitle>
             <CardDescription>{property.general.city} , {property.general.state}</CardDescription>
           </div>
           <div className="flex items-center gap-2">
