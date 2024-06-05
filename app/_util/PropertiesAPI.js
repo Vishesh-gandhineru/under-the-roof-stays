@@ -57,10 +57,10 @@ export function FetchPropertyByLocation () {
 
 export function FetchPropertyForLocationBar (locationName) {
     
-    const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/property/search/${locationName}`;
+    const url = `http://3.107.33.150/api/v1/property/search/${locationName}`;
     let config = {
         headers: {
-            Authorization: `${process.env.NEXT_PUBLIC_AIP_ACCESS_TOKEN}`
+            Authorization: `${process.env.NEXT_PUBLIC_AIP_ACCESS_TOKEN}`,            
         }
     }
  

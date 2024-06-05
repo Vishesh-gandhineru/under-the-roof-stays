@@ -65,6 +65,8 @@ export default function LocationSearchBar() {
     return () => clearTimeout(timer);
   }, [value, fetchLocation]);
 
+ 
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
