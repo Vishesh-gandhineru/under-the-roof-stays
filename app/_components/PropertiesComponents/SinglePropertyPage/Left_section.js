@@ -7,7 +7,9 @@ import { Faqs } from "./Faq_section";
 import { GuestsAllowed } from "./Guest_allowed";
 import SinglePropertyDescription from "../../CustomUi/SinglePropertyDescription";
 
-export const LeftSection = ({ property }) => {
+export const LeftSection = async ({ property }) => {
+
+  
   return (
     <div className="max-w-[60%] w-full ">
       <div>
@@ -22,7 +24,7 @@ export const LeftSection = ({ property }) => {
 
       <GalleryImages property={property} />
       <Anemities property={property} />
-      {/* <PropertyRules property={property} /> */}
+      <PropertyRules property={property} />
       {/* <Faqs property={property} /> */}
       {/* <GuestsAllowed property={property} /> */}
     </div>

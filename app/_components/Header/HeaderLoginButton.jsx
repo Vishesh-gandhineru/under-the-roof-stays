@@ -10,7 +10,7 @@ const HeaderLoginButton = () => {
   return (
     <div className="flex items-center" suppressHydrationWarning>
     {sessionkey ? <Link href="/dashboard" className="ml-4 text-white">Dashboard</Link> : null}
-    {!sessionkey ? <Link href="/login" className="ml-4 text-white">Login</Link> : <button onClick={()=> logout(session)} className="ml-4 text-white" suppressHydrationWarning>Logout</button>}
+    {!sessionkey ? <Link href="/login" className="ml-4 text-white">Login</Link> : <button onClick={()=> logout(sessionkey)} className="ml-4 text-white" suppressHydrationWarning>Logout</button>}
 </div>
   )
 }

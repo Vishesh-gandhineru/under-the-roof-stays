@@ -1,6 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/app/_components/ui/card"
 import { Button } from "@/app/_components/ui/button"
+import Link from "next/link";
 
 export default function page({searchParams}) {
 
@@ -47,7 +48,7 @@ export default function page({searchParams}) {
               </div>
             </CardContent>
           </Card>
-          <Button className="w-full">Check In</Button>
+          <Button className="w-full" asChild><Link href="/percheckin/create-profile">Check In</Link></Button>
         </div>
       </div>
       <div className="mt-8 md:mt-12">

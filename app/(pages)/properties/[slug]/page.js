@@ -1,5 +1,4 @@
-import { propertiesList } from "@/app/_util/Property_list/property_list";
-import Image from "next/image";
+
 import Heading from "@/app/_components/PropertiesComponents/SinglePropertyPage/Heading_property";
 import { HeroBanner } from "@/app/_components/PropertiesComponents/SinglePropertyPage/Hero_banner";
 import { LeftSection } from "@/app/_components/PropertiesComponents/SinglePropertyPage/Left_section";
@@ -12,6 +11,7 @@ export default async function PropertiesSinglePage({ params }) {
  
    const SingleProperty = await FetchSingleProperty(params.slug);
 
+   
    
   
   return (

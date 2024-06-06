@@ -32,11 +32,9 @@ export default async function PropertiesGrid({body = {skip: 0,
                 >
                   {property.general.name}
                 </Link>
-                <div>{/* Add any additional content here */}</div>
+                <h2>Max Occupancy: {property.general.maxOccupancy} , Max pets : {property.general.maxPets == 0 ? "pets not Allowed" :  property.general.maxPets}</h2>
                 <h2 className="text-[#838383] text-lg">{`${property.general.city}, ${property.general.state}, ${property.general.region}`}</h2>
-                {/* <p>{property.descriptions[0].text}</p> */}
-              
-                {/* <h4 className="text-lg font-extrabold">{`Rs ${property.numberofguest.price}/night`}</h4> */}
+             
               </div>
             </div>
           </section>
