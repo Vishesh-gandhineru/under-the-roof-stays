@@ -18,10 +18,13 @@ import { AddGuest } from "../FIlteringComponents/HomeFilter/addGuest"
 import { Calendar } from "../ui/calendar"
 import { addDays} from "date-fns";
 import Link from "next/link"
+import { RatePlan } from "@/app/_util/PropertiesAPI"
+import RatePlanComponent from "./RateplanComponent"
+import FeeComponent from "./FeeComponent"
 
 
 
-export default function BookingForm({propertyId , slug}) {
+export default function BookingForm({propertyId , slug, property}) {
 
   const [date, setDate] = useState({
     from: new Date(),
@@ -30,16 +33,19 @@ export default function BookingForm({propertyId , slug}) {
 
 const [CheckAvailbilityStatus , setCheckAvailbilityStatus] = useState("");  
 const [Loading , setLoading] = useState(false);
-const [GuestFromSessionStorage, setGuestFromSessionStorage] = useState({});
+const [GuestFromSessionStorage, setGuestFromSessionStorage] = useState(() => {
+  return JSON.parse(sessionStorage.getItem("GuestData")) || {};
+});
 const [PropertyAvailableToBook, setPropertyAvailableToBook] = useState(false);
+
+const [SelectedPlan , setSelectedPlan] = useState();
+
 useEffect(() => {
   const getcheckinDate = localStorage.getItem("Checkin-data");
   const getcheckoutDate = localStorage.getItem("Checkout-data");
   if (getcheckinDate && getcheckoutDate) {
     setDate({ from: new Date(getcheckinDate), to: new Date(getcheckoutDate) });
   }
-
-  setGuestFromSessionStorage(JSON.parse(sessionStorage.getItem("GuestData")));
 }, []);
 
 
@@ -67,7 +73,8 @@ const CheckAvailbility = async () => {
   setLoading(true)
   await axios.post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/booking/availablity`, AvailabilityData, {
       headers: {
-        "Authorization": process.env.NEXT_PUBLIC_AIP_ACCESS_TOKEN
+        "Authorization": process.env.NEXT_PUBLIC_AIP_ACCESS_TOKEN,
+        "X-API-Token" : process.env.NEXT_PUBLIC_AIP_ACCESS_TOKEN,
       }, 
      
     })
@@ -111,6 +118,8 @@ const TempButtonClick = () => {
   setPropertyAvailableToBook(true)
 }
 
+
+
      
   return (
     <Card className="w-[500px]">
@@ -136,17 +145,27 @@ const TempButtonClick = () => {
         </form>
       </CardContent>
       <CardFooter className="flex flex-col justify-start items-start gap-3">
-        
+        <div className="flex items-center justify-center gap-4">
+        <h2>Select Rate Plan : </h2>
+        <RatePlanComponent slug={slug} setSelectedPlan={setSelectedPlan} SelectedPlan={SelectedPlan}/>
+        </div>
+
+        <div className="flex flex-col">
+        <h2 className="font-bold text-2xl mb-4">Fees</h2>
+        <FeeComponent property={property}/>
+        </div>
+
       
-     {!PropertyAvailableToBook && <Button onClick={handleButtonClick} disabled={Loading}>Check Availability from API alway return false</Button>}
+     {!PropertyAvailableToBook && <Button onClick={handleButtonClick} disabled={Loading}>Check Availability</Button>}
         {Loading && <div>
           <div class="w-12 h-12 rounded-full animate-spin border border-solid border-yellow-500 border-t-transparent"></div>
           <p>Checking for Availability</p>
           </div> }
         <p>{CheckAvailbilityStatus}</p>
 
-        {!PropertyAvailableToBook && <Button onClick={TempButtonClick}>Temp Check Availability Return True</Button>}
-        {PropertyAvailableToBook && <Button asChild ><Link href={`/checkout?propertyid=${propertyId}&&slug=${slug}`}>Checkout</Link></Button>}
+        {/* {!PropertyAvailableToBook && <Button onClick={TempButtonClick}>Temp Check Availability Return True</Button>}
+        {PropertyAvailableToBook && <Button asChild ><Link href={`/checkout?propertyid=${propertyId}&&slug=${slug}`}>Checkout</Link></Button>} */}
+      
       </CardFooter>
     </Card>
   )

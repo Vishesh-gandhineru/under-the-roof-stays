@@ -78,3 +78,19 @@ export async function singlePropertyPolicies ({slug}) {
     )    
 
 }
+
+
+export async function RatePlan (slug) {
+
+    const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/property/rateplan/${slug}`;
+
+    return await axios.get(url ,config)
+    .then((response) => {
+        return response.data.data;
+    })
+    .catch((error) => {
+        console.log(error);
+    }
+    )
+
+}

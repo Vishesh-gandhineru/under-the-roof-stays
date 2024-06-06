@@ -26,7 +26,7 @@ export default async function PropertiesSinglePage({ params }) {
       
          <LeftSection property={SingleProperty}/>
           <div className="flex flex-col gap-4">
-            <BookingForm propertyId={SingleProperty.propertyId} slug={params.slug}  />
+            <BookingForm propertyId={SingleProperty.propertyId} slug={params.slug} property={SingleProperty} />
             <WeatherCard property={SingleProperty}/>
           </div>
         </div>

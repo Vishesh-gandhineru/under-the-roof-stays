@@ -8,17 +8,18 @@ import { GuestsAllowed } from "./Guest_allowed";
 import SinglePropertyDescription from "../../CustomUi/SinglePropertyDescription";
 
 export const LeftSection = async ({ property }) => {
-
-  
   return (
     <div className="max-w-[60%] w-full ">
       <div>
-        
         <h2 className="font-bold text-3xl mb-3">Detail</h2>
-        {property.descriptions.map((item , index) =>{
+        {property.descriptions.map((item, index) => {
           return (
-            <SinglePropertyDescription key={index} typeCode={item.typeCode} text={item.text} />
-          )
+            <SinglePropertyDescription
+              key={index}
+              typeCode={item.typeCode}
+              text={item.text}
+            />
+          );
         })}
       </div>
 
