@@ -21,6 +21,7 @@ import Link from "next/link"
 import { RatePlan } from "@/app/_util/PropertiesAPI"
 import RatePlanComponent from "./RateplanComponent"
 import FeeComponent from "./FeeComponent"
+import TaxComponent from "./TaxComponent"
 
 
 
@@ -153,6 +154,10 @@ const TempButtonClick = () => {
         <div className="flex flex-col">
         <h2 className="font-bold text-2xl mb-4">Fees</h2>
         <FeeComponent property={property}/>
+        </div>
+        <div className="flex flex-col">
+        <h2 className="font-bold text-2xl mb-4">Taxs</h2>
+        <TaxComponent property={property}/>
         </div>
 
       

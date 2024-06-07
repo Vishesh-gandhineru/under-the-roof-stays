@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function page({searchParams}) {
 
-  const {authid} = searchParams;
+  const {id} = searchParams;
 
   return (
     <div className="w-full max-w-5xl mx-auto px-4 md:px-6 py-8 md:py-12">
@@ -27,13 +27,13 @@ export default function page({searchParams}) {
           <Card>
             <CardContent className="grid gap-4 p-7">
               <div className="flex items-center justify-between">
-                <div className="text-gray-500 dark:text-gray-400">Auth ID</div>
-                <div className="font-medium">{authid}</div>
-              </div>
-              <div className="flex items-center justify-between">
                 <div className="text-gray-500 dark:text-gray-400">Booking ID</div>
-                <div className="font-medium">ABC123</div>
-              </div>
+                <div className="font-medium">{id}</div>
+              </div>  
+              <div className="flex items-center justify-between">
+                <div className="text-gray-500 dark:text-gray-400">Property Name</div>
+                <div className="font-medium">Test property</div>
+              </div>            
               <div className="flex items-center justify-between">
                 <div className="text-gray-500 dark:text-gray-400">Guests</div>
                 <div className="font-medium">2 adults</div>
@@ -48,7 +48,7 @@ export default function page({searchParams}) {
               </div>
             </CardContent>
           </Card>
-          <Button className="w-full" asChild><Link href="/percheckin/create-profile">Check In</Link></Button>
+          <Button className="w-full" asChild><Link href={`/percheckin/create-profile?id=${id}`}>Check In</Link></Button>
         </div>
       </div>
       <div className="mt-8 md:mt-12">
