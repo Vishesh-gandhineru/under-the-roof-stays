@@ -1,4 +1,3 @@
-"use server"
 
 import axios from "axios";
 
@@ -7,10 +6,10 @@ const config = {headers : {
 }}
 
 
-export  async function postLoginWithOTP (body , setIsLoading , setError , setSuccess) {
+export   function postLoginWithOTP (body , setIsLoading , setError , setSuccess) {
     setIsLoading(true);
-    const url = `http://3.107.33.150/api/v1/user/generate-otp/login`; 
-     axios.post(url,body , header)
+    const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/generate-otp/login`; 
+     axios.post(url,body , config)
     .then((response) => {
         console.log(response);
         setIsLoading(false);
@@ -28,10 +27,10 @@ export  async function postLoginWithOTP (body , setIsLoading , setError , setSuc
     )
 }
 
-export async function verifyOTP (body , setOtpVerified){
+export  function verifyOTP (body , setOtpVerified){
 
     const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/verify-otp/login`;
-    axios.post(url,body ,header)
+    axios.post(url,body ,config)
     .then((response) => {  
         if (response.status === 200){
      setOtpVerified(true);
@@ -48,7 +47,7 @@ export async function verifyOTP (body , setOtpVerified){
 }
 
 
-export async function postRegistertion (body) {
+export  function postRegistertion (body) {
     const registerUrl = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/register`;
     axios.post(url, body)
     .then((response) => {
@@ -84,7 +83,7 @@ export async function GenerateOtpForResgistrastion (body , setIsLoading , setErr
     )
 }
 
-export async function verifyRegisterOTP (OtpBody , setOtpVerified , FormData){
+export  function verifyRegisterOTP (OtpBody , setOtpVerified , FormData){
 
     const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/verify-otp/register`;
     axios.post(url, {
@@ -108,7 +107,7 @@ export async function verifyRegisterOTP (OtpBody , setOtpVerified , FormData){
 }
 
 
-export async function logout (session) {
+export  function logout (session) {
     const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/logout`;
      axios.post(url,{},{ 
         headers: {

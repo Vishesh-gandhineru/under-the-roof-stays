@@ -18,10 +18,14 @@ import { AddGuest } from "../FIlteringComponents/HomeFilter/addGuest"
 import { Calendar } from "../ui/calendar"
 import { addDays} from "date-fns";
 import Link from "next/link"
-import { RatePlan } from "@/app/_util/PropertiesAPI"
+import { FetchPropertyCalendar, RatePlan } from "@/app/_util/PropertiesAPI"
 import RatePlanComponent from "./RateplanComponent"
 import FeeComponent from "./FeeComponent"
 import TaxComponent from "./TaxComponent"
+import getSymbolFromCurrency from 'currency-symbol-map'
+
+
+
 
 
 
@@ -33,6 +37,7 @@ export default function BookingForm({propertyId , slug, property}) {
 });
 
 const [CheckAvailbilityStatus , setCheckAvailbilityStatus] = useState("");  
+const [CalenderData , setCalenderData] = useState();
 const [Loading , setLoading] = useState(false);
 const [GuestFromSessionStorage, setGuestFromSessionStorage] = useState(() => {
   return JSON.parse(sessionStorage.getItem("GuestData")) || {};
@@ -41,12 +46,13 @@ const [PropertyAvailableToBook, setPropertyAvailableToBook] = useState(false);
 
 const [SelectedPlan , setSelectedPlan] = useState();
 
-useEffect(() => {
-  const getcheckinDate = localStorage.getItem("Checkin-data");
-  const getcheckoutDate = localStorage.getItem("Checkout-data");
+useEffect( () => {
+  const getcheckinDate = sessionStorage.getItem("Checkin-data");
+  const getcheckoutDate = sessionStorage.getItem("Checkout-data");
   if (getcheckinDate && getcheckoutDate) {
     setDate({ from: new Date(getcheckinDate), to: new Date(getcheckoutDate) });
   }
+
 }, []);
 
 
@@ -109,7 +115,6 @@ const CheckAvailbility = async () => {
      }  
 
 const handleButtonClick = () => {
-  console.log("button clicked")
   CheckAvailbility();
 };
 
@@ -121,6 +126,65 @@ const TempButtonClick = () => {
 
 
 
+useEffect(() => {
+  async function getCalenderData() {
+   const response = await FetchPropertyCalendar(slug);
+   return setCalenderData(response);
+  }
+  getCalenderData();
+},[])
+
+const ConvertedCalendarData =  CalenderData ? CalenderData : [];
+const NotAvailableDate = [];
+const AvailableDate = [];
+
+
+
+function processData(data) {
+  const keys = Object.keys(data);
+  const values = Object.values(data);
+
+  keys.forEach((key, index) => {
+      const value = values[index];
+      if (value.quantity === 0) {
+        NotAvailableDate.push(new Date(key));  
+      } 
+      else {
+        AvailableDate.push({date: new Date(key), quantity: value.quantity , baseAmount: value.baseAmount , currency: value.currency});
+      }
+  });
+}
+processData(ConvertedCalendarData);
+
+// console.log(NotAvailableDate , "this dates are not available")
+
+console.log(AvailableDate , "this dates are available")
+
+
+
+function CustomDayContent(props) {
+  const today = new Date();
+ 
+  if (props.date >= today){
+    for(let i = 0; i < AvailableDate.length; i++){
+      if (props.date.getDate() == AvailableDate[i].date.getDate()){
+        return (
+          <span style={{ position: "relative", overflow: "visible" }}>
+            {props.date.getDate()} <br />
+            <span className="text-[10px]">{props.date >= today ? `${getSymbolFromCurrency(AvailableDate[i].currency)}${AvailableDate[i].baseAmount}`: ""}</span>
+            
+          </span>
+        )
+      }
+    }
+  }
+
+  return (
+    <span style={{ position: "relative", overflow: "visible" }}>
+    {props.date.getDate()} <br />
+  </span>
+  )
+}
      
   return (
     <Card className="w-[500px]">
@@ -133,11 +197,15 @@ const TempButtonClick = () => {
             <div className="flex flex-col space-y-1.5 items-start justify-start gap-3">
               <Label htmlFor="name">Check-in / Checkout</Label>
               <Calendar
+               components={{
+                DayContent: CustomDayContent // Replace the DayContent component
+              }}
             initialFocus
             mode="range"
             defaultMonth={date?.from}
             selected={date}
             onSelect={setDate}
+            disabled={[{before: new Date()}, ...NotAvailableDate]}
           />
               <Label>Add Guest</Label>
               <AddGuest setGuestFromSessionStorage={setGuestFromSessionStorage} />
@@ -145,6 +213,7 @@ const TempButtonClick = () => {
           </div>
         </form>
       </CardContent>
+         
       <CardFooter className="flex flex-col justify-start items-start gap-3">
         <div className="flex items-center justify-center gap-4">
         <h2>Select Rate Plan : </h2>
@@ -160,7 +229,7 @@ const TempButtonClick = () => {
         <TaxComponent property={property}/>
         </div>
 
-      
+     
      {!PropertyAvailableToBook && <Button onClick={handleButtonClick} disabled={Loading}>Check Availability</Button>}
         {Loading && <div>
           <div class="w-12 h-12 rounded-full animate-spin border border-solid border-yellow-500 border-t-transparent"></div>
@@ -168,10 +237,18 @@ const TempButtonClick = () => {
           </div> }
         <p>{CheckAvailbilityStatus}</p>
 
-        {/* {!PropertyAvailableToBook && <Button onClick={TempButtonClick}>Temp Check Availability Return True</Button>}
-        {PropertyAvailableToBook && <Button asChild ><Link href={`/checkout?propertyid=${propertyId}&&slug=${slug}`}>Checkout</Link></Button>} */}
-      
+         {!PropertyAvailableToBook && <Button onClick={TempButtonClick}>Temp Check Availability Return True</Button>}
+        {PropertyAvailableToBook && <Button asChild ><Link href={{
+          pathname: '/checkout',
+          query: { slug: slug, propertyId: propertyId, checkIn: formatDate(date?.from), checkOut: formatDate(date?.to), adults: GuestFromSessionStorage?.AdultGuestCount, children: GuestFromSessionStorage?.ChildGuestCount, pets: GuestFromSessionStorage?.PetsGuestCount, ratePlanId: SelectedPlan ? SelectedPlan.planId : "" , ratePlanName: SelectedPlan ? SelectedPlan.planName : ""}
+        
+        }}>Checkout</Link></Button>}
+        <div className="font-bold text-2xl mt-3">
+        {property.rates[0]?.baseAmount} {property.rates[0]?.currency}
+      </div>
       </CardFooter>
     </Card>
   )
 }
+ 
+

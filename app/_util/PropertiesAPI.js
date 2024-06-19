@@ -94,3 +94,16 @@ export async function RatePlan (slug) {
     )
 
 }
+
+export async function FetchPropertyCalendar (slug) {
+    const url = `http://localhost:4000/api/v1/calendar/${slug}`;
+  
+    return axios.get(url ,config)
+    .then((response) => {
+        return response.data.data;
+    })
+    .catch((error) => {
+        console.log(error);
+    }
+    )    
+}

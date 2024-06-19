@@ -22,9 +22,8 @@ export default function LoginForm() {
         "countryCode":countryCode,
         "role": "user"
     }
- function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    console.log(body);
     postLoginWithOTP(body , setIsLoading , setError , setSuccess);
     }
 

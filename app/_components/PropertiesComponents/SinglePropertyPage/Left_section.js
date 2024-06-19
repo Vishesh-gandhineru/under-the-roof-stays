@@ -8,6 +8,7 @@ import { GuestsAllowed } from "./Guest_allowed";
 import SinglePropertyDescription from "../../CustomUi/SinglePropertyDescription";
 
 export const LeftSection = async ({ property }) => {
+
   return (
     <div className="max-w-[60%] w-full ">
       <div>

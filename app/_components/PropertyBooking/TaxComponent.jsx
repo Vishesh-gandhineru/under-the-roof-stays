@@ -23,7 +23,7 @@ export default function TaxComponent({ property }) {
         <TableBody>
           {taxData.map((taxs) => {
             return (
-              <TableRow>
+              <TableRow key={taxs.taxCode}>
                 <TableCell>{taxs.taxCode}</TableCell>
                 <TableCell>
                   {!taxs.included ? "Not included" : "Included"}

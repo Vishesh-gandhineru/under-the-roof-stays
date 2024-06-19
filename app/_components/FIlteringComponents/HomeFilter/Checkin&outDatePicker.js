@@ -15,8 +15,8 @@ import {
 
 export default function CheckinOutDatePicker({ className }) {
 
-  let CheckinDateFromLocal = localStorage.getItem("Checkin-data");
-  let CheckoutDateFromLocal = localStorage.getItem("Checkout-data");
+  let CheckinDateFromLocal = sessionStorage.getItem("Checkin-data");
+  let CheckoutDateFromLocal = sessionStorage.getItem("Checkout-data");
   
   const [date, setDate] = useState({
     from: CheckinDateFromLocal ? new Date(CheckinDateFromLocal) : new Date(),
@@ -24,8 +24,8 @@ export default function CheckinOutDatePicker({ className }) {
   });
   
   useEffect(() => {  
-    localStorage.setItem("Checkin-data", date?.from?.toString());
-    localStorage.setItem("Checkout-data", date?.to?.toString());     
+    sessionStorage.setItem("Checkin-data", date?.from?.toString());
+    sessionStorage.setItem("Checkout-data", date?.to?.toString());     
   }, [date]);
 
   return (
@@ -62,6 +62,7 @@ export default function CheckinOutDatePicker({ className }) {
             selected={date}
             onSelect={setDate}
             numberOfMonths={2}
+            disabled={{ before : new Date()}}
           />
         </PopoverContent>
       </Popover>

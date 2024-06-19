@@ -3,13 +3,13 @@ import Link from "next/link";
 import CompareButton from "../CustomUi/CompareButtom";
 import { FetchProperty } from "@/app/_util/PropertiesAPI";
 import WeatherPopover from "../WeatherComponent/WeatherPopover";
+import PropertyRate from "../CustomUi/PropertyRate";
 
 
 export default async function PropertiesGrid({body = {skip: 0,
   limit: 9}}) {
   
   const propertiesListAPI = await FetchProperty(body);
-
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 relative">
@@ -35,6 +35,7 @@ export default async function PropertiesGrid({body = {skip: 0,
                 <h2>Max Occupancy: {property.general.maxOccupancy} , Max pets : {property.general.maxPets == 0 ? "pets not Allowed" :  property.general.maxPets}</h2>
                 <h2 className="text-[#838383] text-lg">{`${property.general.city}, ${property.general.state}, ${property.general.region}`}</h2>
              
+              <PropertyRate property={property} />
               </div>
             </div>
           </section>
