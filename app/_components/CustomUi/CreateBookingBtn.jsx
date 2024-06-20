@@ -3,14 +3,17 @@ import React from "react";
 import { Button } from "../ui/button";
 import { CreateBooking } from "../../_util/BookingAPI";
 import { useSession } from "@/app/context/useSession";
+import { cn } from "@/lib/utils";
 
-const CreateBookingBtn = ({ bookingData }) => {
+const CreateBookingBtn = ({ bookingData , className }) => {
   const { sessionId } = useSession();
 
   return (
-    <div className="col-span-2 flex justify-end">
+    <div className={cn("col-span-2 flex justify-end", [
+      className
+    ])}>
       <Button
-        size="lg"
+      className="w-full"
         type="button"
         onClick={async () => {
             try {

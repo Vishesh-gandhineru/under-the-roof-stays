@@ -5,6 +5,7 @@ import { LeftSection } from "@/app/_components/PropertiesComponents/SingleProper
 import { FetchSingleProperty } from "@/app/_util/PropertiesAPI";
 import BookingForm from "@/app/_components/PropertyBooking/BookingForm";
 import WeatherCard from "@/app/_components/WeatherComponent/WeatherCard";
+import PropertyDetailsBanner from "@/app/_components/PropertiesComponents/SinglePropertyPage/PropertyDetailsBanner";
 
 // import
 export default async function PropertiesSinglePage({ params }) {
@@ -22,12 +23,12 @@ export default async function PropertiesSinglePage({ params }) {
           location={SingleProperty.general.city}
         />
         <HeroBanner property={SingleProperty} />
+        <PropertyDetailsBanner property={SingleProperty.general}/>
         <div className="flex justify-between mt-[5vh]">
-      
          <LeftSection property={SingleProperty}/>
           <div className="flex flex-col gap-4">
             <BookingForm propertyId={SingleProperty.propertyId} slug={params.slug} property={SingleProperty} />
-            <WeatherCard property={SingleProperty}/>
+            {/* <WeatherCard property={SingleProperty}/> */}
           </div>
         </div>
       </div>

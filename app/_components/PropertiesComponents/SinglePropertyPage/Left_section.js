@@ -6,6 +6,7 @@ import { PropertyRules } from "./Property_rules";
 import { Faqs } from "./Faq_section";
 import { GuestsAllowed } from "./Guest_allowed";
 import SinglePropertyDescription from "../../CustomUi/SinglePropertyDescription";
+import NearByPlaces from "./NearByPlaces";
 
 export const LeftSection = async ({ property }) => {
 
@@ -26,6 +27,7 @@ export const LeftSection = async ({ property }) => {
 
       <GalleryImages property={property} />
       <Anemities property={property} />
+      <NearByPlaces places={property.nearestPlaces}/>
       <PropertyRules property={property} />
       {/* <Faqs property={property} /> */}
       {/* <GuestsAllowed property={property} /> */}

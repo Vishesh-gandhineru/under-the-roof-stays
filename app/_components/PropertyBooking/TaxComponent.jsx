@@ -28,7 +28,7 @@ export default function TaxComponent({ property }) {
                 <TableCell>
                   {!taxs.included ? "Not included" : "Included"}
                 </TableCell>
-                <TableCell>{taxs.percentage}</TableCell>
+                <TableCell>{!taxs.percentage == 0 ? `${taxs.percentage} %`: "" }{taxs.amountFlat ? `${taxs.amountFlat} Flat` : ""}</TableCell>
                 <TableCell>{taxs.tax}</TableCell>
               </TableRow>
             );

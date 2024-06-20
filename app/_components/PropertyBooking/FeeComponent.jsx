@@ -1,74 +1,98 @@
+/**
+ * v0 by Vercel.
+ * @see https://v0.dev/t/xJ8t4Gm2svZ
+ * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ */
+"use client"
 
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/app/_components/ui/carousel"
-import { Card } from "@/app/_components/ui/card"
+import { useState } from "react"
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/app/_components/ui/table"
+import { Checkbox } from "@/app/_components/ui/checkbox"
+import getSymbolFromCurrency from "currency-symbol-map"
 
-export default function FeeComponent({property}) {
-  const fees = [
-    {
-      feeCode: "TRANS_FEE",
-      feeType: "Transaction Fee",
-      feeMode: "Flat",
-      currency: "USD",
-      amount: 2.99,
-      isTaxable: true,
-      applicableTaxPercentage: 10,
-    },
-    {
-      feeCode: "SERV_FEE",
-      feeType: "Service Fee",
-      feeMode: "Percentage",
-      currency: "USD",
-      amount: 5,
-      isTaxable: false,
-      applicableTaxPercentage: 0,
-    },
-    {
-      feeCode: "PROC_FEE",
-      feeType: "Processing Fee",
-      feeMode: "Flat",
-      currency: "EUR",
-      amount: 1.99,
-      isTaxable: true,
-      applicableTaxPercentage: 20,
-    },
-  ]
+export default function FeeComponent({property, charges}) {
+
+ const {fees} = property;
+ const { required , optional} = charges;
+  
+  const [selectedFees, setSelectedFees] = useState([])
+  const handleFeeSelect = (feeCode) => {
+    if (selectedFees.includes(feeCode)) {
+      setSelectedFees(selectedFees.filter((code) => code !== feeCode))
+    } else {
+      setSelectedFees([...selectedFees, feeCode])
+    }
+  }
   return (
-    <Carousel className="w-[400px]">
-      <CarouselContent>
-        {fees.map((fee, index) => (
-          <CarouselItem key={index}>
-            <Card className="p-6 grid gap-4">
-              <div className="grid gap-2">
-                <div className="flex items-center justify-between">
-                  <span className="font-medium">{fee.feeType}</span>
-                  <span className="font-medium">
-                    {fee.currency} {fee.amount.toFixed(2)}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
-                  <span>Fee Code: {fee.feeCode}</span>
-                  <span>Fee Mode: {fee.feeMode}</span>
-                </div>
-              </div>
-              <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+    <div className="w-full max-w-3xl">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[32px]">
+              <Checkbox
+                checked={selectedFees.length === fees.length}
+                onCheckedChange={(checked) => {
+                  if (checked) {
+                    setSelectedFees(fees.map((fee) => fee.feeCode))
+                  } else {
+                    setSelectedFees([])
+                  }
+                }}
+              />
+            </TableHead>
+            <TableHead>Name</TableHead>
+            <TableHead>Fee Type</TableHead>
+            <TableHead>Fee Mode</TableHead>
+            <TableHead>Amount</TableHead>
+            <TableHead>Taxable</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {optional.map((fee, index) => (
+            <TableRow key={index}>
+              <TableCell>
+                <Checkbox
+                  checked={selectedFees.includes(fee.feeCode)}
+                  onCheckedChange={() => handleFeeSelect(fee.feeCode)}
+                />
+              </TableCell>
+              <TableCell>{fee.chargeName}</TableCell>
+              <TableCell>{fee.chargeType}</TableCell>
+              <TableCell>{fee.chargeMode}</TableCell>
+              <TableCell>
+               {getSymbolFromCurrency(fee.currency)} {fee.itemPrice.toFixed(2)}
+              </TableCell>
+              <TableCell>
                 <div className="flex items-center gap-2">
                   <CurrencyIcon className="w-4 h-4" />
-                  <span>Taxable: {fee.isTaxable ? "Yes" : "No"}</span>
+                  <span>{fee.taxable ? "Yes" : "No"}</span>
                 </div>
-                {fee.isTaxable && (
-                  <div className="flex items-center gap-2">
-                    <PercentIcon className="w-4 h-4" />
-                    <span>Tax: {fee.applicableTaxPercentage}%</span>
-                  </div>
-                )}
-              </div>
-            </Card>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel>
+              </TableCell>
+             
+            </TableRow>
+          ))}
+          {required.map((fee, index) => (
+            <TableRow key={index}>
+              <TableCell>
+              </TableCell>
+              <TableCell>{fee.chargeName}</TableCell>
+              <TableCell>{fee.chargeType}</TableCell>
+              <TableCell>{fee.chargeMode}</TableCell>
+              <TableCell>
+               {getSymbolFromCurrency(fee.currency)} {fee.itemPrice.toFixed(2)}
+              </TableCell>
+              <TableCell>
+                <div className="flex items-center gap-2">
+                  <CurrencyIcon className="w-4 h-4" />
+                  <span>{fee.taxable ? "Yes" : "No"}</span>
+                </div>
+              </TableCell>
+             
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   )
 }
 
