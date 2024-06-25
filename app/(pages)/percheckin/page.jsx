@@ -22,7 +22,7 @@ export default function page({searchParams}) {
         <div className="grid gap-6">
           <div className="grid gap-2">
             <h1 className="text-2xl md:text-3xl font-bold">Welcome, John Doe</h1>
-            <p className="text-gray-500 dark:text-gray-400">We're excited to have you stay with us!</p>
+            <p className="text-gray-500 dark:text-gray-400">We&apos;re excited to have you stay with us!</p>
           </div>
           <Card>
             <CardContent className="grid gap-4 p-7">

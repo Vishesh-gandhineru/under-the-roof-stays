@@ -44,14 +44,14 @@ export default async function CheckoutPage({ searchParams }) {
     children: Number(children), //optional or send 0 format = int
     babies: 0, //optional or send 0 format = int
     pets: Number(pets), //optional or send 0 format = int
-    currency: "INR",
+    currency: currency,
     bookerDetails: {
       surName: "Jhadi", //required
       titleCode: "male", //required [male, female, family]
       firstName: "Vishesh Jhadi", //required
       countryCode: "us", // required
       language: "en", //required "two letter"
-      zipCode: "", // required
+      zipCode: "400001", // required
       houseNumber: "", // required
       street: "test", // required
       place: "test", // required
@@ -61,8 +61,8 @@ export default async function CheckoutPage({ searchParams }) {
       dateOfBirth: "2000-01-29", // required yyyy-mm-dd
     },
     remark: "",
-    totalPrice: Number(property?.rates[0]?.baseAmount), // ***** this needs to come from quote API
-    rateplanId: ratePlanId,
+    totalPrice: Number(totalAmount), // ***** this needs to come from quote API
+    rateplanId: null,
     fees: [
       {
         feeCode: "FIN",
@@ -129,6 +129,8 @@ export default async function CheckoutPage({ searchParams }) {
   // ]
   // }
 
+
+  console.log(bookingData)
   return (
     <div className="flex flex-col min-h-screen">
       {!slug ? (

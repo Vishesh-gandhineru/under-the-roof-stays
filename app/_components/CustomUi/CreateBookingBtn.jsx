@@ -1,14 +1,20 @@
 "use client";
-import React from "react";
+import React, { useEffect , useState } from "react";
 import { Button } from "../ui/button";
 import { CreateBooking } from "../../_util/BookingAPI";
 import { useSession } from "@/app/context/useSession";
 import { cn } from "@/lib/utils";
 
 const CreateBookingBtn = ({ bookingData , className }) => {
-  const { sessionId } = useSession();
+  const session = useSession(state => state.session);
+  const sessionkey = session.sessionId  
+  const [isBookingCreated , setIsBookingCreated] = useState(false);
+  const [bookingResponse , setBookingResponse] = useState();
 
-  return (
+  console.log(bookingResponse)
+
+
+  return (  
     <div className={cn("col-span-2 flex justify-end", [
       className
     ])}>
@@ -16,12 +22,9 @@ const CreateBookingBtn = ({ bookingData , className }) => {
       className="w-full"
         type="button"
         onClick={async () => {
-            try {
                 console.log("Booking Data", bookingData);
-              await CreateBooking(sessionId, bookingData);
-            } catch (error) {
-              console.error(error);
-            }
+                const Booking = await CreateBooking(sessionkey, bookingData);
+                setBookingResponse(Booking);
           }}>
         Place Order
       </Button>

@@ -20,7 +20,7 @@ export default function PriceBreakDown({ QuotationData }) {
         <div className="grid gap-1">
           <h1 className="text-2xl font-bold">Price Breakdown</h1>
           <p className="text-muted-foreground">
-            See the details of what you're paying for.
+            See the details of what you&apos;re paying for.
           </p>
         </div>
         <div className="overflow-x-auto">

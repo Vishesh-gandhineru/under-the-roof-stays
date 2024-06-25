@@ -24,8 +24,13 @@ import FeeComponent from "./FeeComponent";
 import TaxComponent from "./TaxComponent";
 import getSymbolFromCurrency from "currency-symbol-map";
 import PriceBreakDown from "../PropertiesComponents/SinglePropertyPage/PriceBreakDown";
+import { useSession } from "@/app/context/useSession";
 
 export default function BookingForm({ propertyId, slug, property }) {
+  
+  const session = useSession(state => state.session);
+  const sessionkey = session.sessionId  
+  
   const [date, setDate] = useState({
     from: new Date(),
     to: addDays(new Date(), 1),
@@ -74,8 +79,10 @@ export default function BookingForm({ propertyId, slug, property }) {
     babies: 0, //optional or send 0 format = int
     pets: GuestFromSessionStorage?.PetsGuestCount,
     ratePlanId: null,
-    currency: property.rates[0].currency, //optional or send 0 format = int
+    currency: property?.rates[0]?.currency, //optional or send 0 format = int
   };
+
+  console.log(AvailabilityData);
 
 
   const CheckAvailbility = async () => {
@@ -86,8 +93,7 @@ export default function BookingForm({ propertyId, slug, property }) {
         AvailabilityData,
         {
           headers: {
-            Authorization:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6IjYyODE1MTA4NjAiLCJlbWFpbCI6InZpc2hlc2hqaGFkaTEwMEBnbWFpbC5jb20iLCJjb3VudHJ5Q29kZSI6Iis5MSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzE4ODU2NzU2LCJleHAiOjE3MTkxMTU5NTZ9.KW8Pr-wF8mNv5UtchXskI1Fz4B27UfhIjA2u5OvMm1U",
+            Authorization: sessionkey,
             "X-API-Token": process.env.NEXT_PUBLIC_AIP_ACCESS_TOKEN,
           },
         }
@@ -105,12 +111,8 @@ export default function BookingForm({ propertyId, slug, property }) {
       .catch((error) => {
         setLoading(false);
         if (error.response) {
-          if (error.response.status === 409) {
-            setCheckAvailbilityStatus(
-              "The Property is already booked for the selected dates"
-            );
-          }
-          console.log(error);
+          setCheckAvailbilityStatus(error.response.data.message);
+          console.log(error.response.data);
         }
       });
   };
@@ -248,7 +250,7 @@ export default function BookingForm({ propertyId, slug, property }) {
         )}
         {Loading && (
           <div>
-            <div class="w-12 h-12 rounded-full animate-spin border border-solid border-yellow-500 border-t-transparent"></div>
+            <div className="w-12 h-12 rounded-full animate-spin border border-solid border-yellow-500 border-t-transparent"></div>
             <p>Checking for Availability</p>
           </div>
         )}

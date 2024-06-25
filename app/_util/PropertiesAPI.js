@@ -51,7 +51,7 @@ export async function FetchPropertyByLocation () {
 
 export async function FetchPropertyForLocationBar (locationName) {
     
-    const url = `http://3.107.33.150/api/v1/property/search/${locationName}`;
+    const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/property/search/${locationName}`;
    
     return axios.get(url ,config)
     .then((response) => {
@@ -96,7 +96,7 @@ export async function RatePlan (slug) {
 }
 
 export async function FetchPropertyCalendar (slug) {
-    const url = `http://localhost:4000/api/v1/calendar/${slug}`;
+    const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/calendar/${slug}`;
   
     return axios.get(url ,config)
     .then((response) => {
