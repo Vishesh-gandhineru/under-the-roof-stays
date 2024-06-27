@@ -105,8 +105,6 @@ export default function BookingForm({ propertyId, slug, property }) {
           setQuotationData(response.data.data);
           setPropertyAvailableToBook(true);
         }
-        console.log(response.data);
-        console.log("This is response data");
       })
       .catch((error) => {
         setLoading(false);
