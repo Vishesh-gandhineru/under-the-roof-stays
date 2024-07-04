@@ -16,6 +16,7 @@ import CreateBookingBtn from "@/app/_components/CustomUi/CreateBookingBtn";
 import { PropertyRules } from "@/app/_components/PropertiesComponents/SinglePropertyPage/Property_rules";
 import getSymbolFromCurrency from "currency-symbol-map";
 import Link from "next/link";
+import CheckoutForm from "@/app/_components/PropertyBooking/CheckoutForm";
 
 export default async function CheckoutPage({ searchParams }) {
   const {
@@ -129,8 +130,6 @@ export default async function CheckoutPage({ searchParams }) {
   // ]
   // }
 
-
-  console.log(bookingData)
   return (
     <div className="flex flex-col min-h-screen">
       {!slug ? (
@@ -143,72 +142,7 @@ export default async function CheckoutPage({ searchParams }) {
         <main className="flex-1 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-8 p-8">
           <div className="bg-white shadow-lg rounded-lg p-8">
             <h1 className="text-2xl font-bold mb-4">Checkout</h1>
-            <form className="grid grid-cols-2 gap-4">
-              <div className="col-span-2 flex  gap-3">
-                <div className="w-[10%]">
-                  <Label htmlFor="title">Title</Label>
-                  <Select id="title">
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select title" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="male">Male</SelectItem>
-                    <SelectItem value="female">Female</SelectItem>
-                    <SelectItem value="family">Family</SelectItem>
-                  </SelectContent>
-                </Select>
-                </div>
-                <div className="w-[44%]">
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" placeholder="Enter your name" />
-                </div>
-                <div className="w-[44%]">
-                  <Label htmlFor="surName">surName</Label>
-                  <Input id="surName" placeholder="Enter your surName" />
-                </div>
-              </div>
-              <div className="col-span-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" placeholder="Enter your email" type="email" />
-              </div>
-              <div className="col-span-2">
-                <div className=" space-y-4">
-                
-              <div className="grid grid-cols-3 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="houseNumber">House Number / Door Number</Label>
-                  <Input id="houseNumber" placeholder="Door 250" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="city">City</Label>
-                  <Input id="city" placeholder="New York" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="state">State</Label>
-                  <Input id="state" placeholder="NY" />
-                </div>
-              </div>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="street">Street</Label>
-                  <Input id="street" placeholder="street" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="zip">Zip Code</Label>
-                  <Input id="zip" placeholder="10001" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Phone</Label>
-                  <Input id="phone" placeholder="+1 (555) 555-5555" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="dob">DOB</Label>
-                  <Input id="dob" type="date" placeholder="2000-05-29" />
-                </div>
-                </div>
-                </div>
-              </div>                           
-            </form>
+            <CheckoutForm />
             <PropertyRules property={property} />
           </div>
           <div className="bg-white shadow-lg rounded-lg p-8 h-fit">
