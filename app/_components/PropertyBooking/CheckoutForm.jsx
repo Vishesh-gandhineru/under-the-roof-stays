@@ -5,19 +5,17 @@ import { Label } from "@/app/_components/ui/label";
 import { Input } from "@/app/_components/ui/input";
 
 
-const CheckoutForm = () => {
+const CheckoutForm = ({userData , setUserData}) => {
  
-    const [userData , setUserData] = useState({});
-
+   
     const handleFormChange = (e) => {
+      setTimeout(()=> {
         setUserData({
-            ...userData,
-            [e.target.name] : e.target.value
-        })
+          ...userData,
+          [e.target.name] : e.target.value
+      })
+      } , [1000])  
     }
-
-    console.log(userData)
-
 
   return (
     <form className="grid grid-cols-2 gap-4">

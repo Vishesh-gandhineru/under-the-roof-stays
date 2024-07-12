@@ -1,4 +1,7 @@
+"use client"
+
 import { Label } from "@/app/_components/ui/label";
+import { useState } from "react";
 import { Input } from "@/app/_components/ui/input";
 import { Textarea } from "@/app/_components/ui/textarea";
 import {
@@ -17,8 +20,9 @@ import { PropertyRules } from "@/app/_components/PropertiesComponents/SingleProp
 import getSymbolFromCurrency from "currency-symbol-map";
 import Link from "next/link";
 import CheckoutForm from "@/app/_components/PropertyBooking/CheckoutForm";
+import useSWR from "swr";
 
-export default async function CheckoutPage({ searchParams }) {
+export default  function CheckoutPage({ searchParams }) {
   const {
     slug,
     propertyId,
@@ -34,8 +38,11 @@ export default async function CheckoutPage({ searchParams }) {
 
   } = searchParams;
 
-  const property = await FetchSingleProperty(slug);
+  const [userData , setUserData] = useState({});
 
+  // const property = await FetchSingleProperty(slug);
+  const fetcher = (slug) => FetchSingleProperty(slug); 
+  const { data: property, error } = useSWR(slug, fetcher);
   const bookingData = {
     propertyId: propertyId, //required
     slug: slug, //required
@@ -47,19 +54,19 @@ export default async function CheckoutPage({ searchParams }) {
     pets: Number(pets), //optional or send 0 format = int
     currency: currency,
     bookerDetails: {
-      surName: "Jhadi", //required
-      titleCode: "male", //required [male, female, family]
-      firstName: "Vishesh Jhadi", //required
+      surName: userData?.surName || "Jhadi", //required
+      titleCode: userData?.title || "male", //required [male, female, family]
+      firstName: userData?.name || "vishesh", //required
       countryCode: "us", // required
-      language: "en", //required "two letter"
-      zipCode: "400001", // required
-      houseNumber: "", // required
-      street: "test", // required
-      place: "test", // required
-      stateProv: "test", // required
-      phoneNumber: "6281510860", // required
-      email: "visheshjhadi@gmail.com", // required
-      dateOfBirth: "2000-01-29", // required yyyy-mm-dd
+      language:  "en", //required "two letter"
+      zipCode: userData?.zip || "400001", // required
+      houseNumber: userData?.houseNumber | "houseNumber", // required
+      street: userData?.street || "test", // required
+      place: userData?.city || "test", // required
+      stateProv: userData?.state || "test", // required
+      phoneNumber: userData?.phone || "6281510860", // required
+      email: userData?.email || "visheshjhadi@gmail.com", // required
+      dateOfBirth: userData?.dob || "2000-01-29", // required yyyy-mm-dd
     },
     remark: "",
     totalPrice: Number(totalAmount), // ***** this needs to come from quote API
@@ -83,52 +90,6 @@ export default async function CheckoutPage({ searchParams }) {
     ],
   };
 
-  //   {
-  //     "propertyId": "b6745b1e-772b-4f04-9408-4c66d814b0b0", //required
-  //     "slug": "nextpax-demo-1", //required
-  //     "checkIn": "2024-06-26", //required format = YYYY-MM-DD
-  //     "checkOut": "2024-06-28", //required format = YYYY-MM-DD
-  //     "adults": 4, //required format = int
-  //     "children": 0, //optional or send 0 format = int
-  //     "babies": 0, //optional or send 0 format = int
-  //     "pets": 0, //optional or send 0 format = int
-  //     "currency": "USD",
-  //     "bookerDetails": {
-  // "surName": "Jhadi", //required
-  // "titleCode": "male", //required [male, female, family]
-  // "firstName": "Vishesh Jhadi", //required
-  // "countryCode": "us", // required
-  // "language": "en", //required "two letter"
-  // "zipCode": "", // required
-  // "houseNumber": "", // required
-  // "street": "test", // required
-  // "place": "test", // required
-  // "stateProv": "test", // required
-  // "phoneNumber": "6281510860", // required
-  // "email": "visheshjhadi@gmail.com", // required
-  // "dateOfBirth": "2000-01-29" // required yyyy-mm-dd
-  //     },
-  // "remark": "",
-  // "totalPrice": 1201, // in rupees
-  // "rateplanId": null,
-  // "fees": [
-  //     {
-  //         "feeCode": "FIN",
-  //         "fee": "Final cleaning",
-  //         "type": "Obligatory",
-  //         "mode": "Price per stay",
-  //         "chargeType": "MAN",
-  //         "currency": "EUR",
-  //         "chargeMode": "STA",
-  //         "amount": 10000,
-  //         "fromDate": "2023-06-22T00:00:00.000+00:00",
-  //         "untilDate": "2030-06-01T00:00:00.000+00:00",
-  //         "isTaxable": false,
-  //         "applicableTaxPercentage": 0,
-  //         "quantity": 1
-  //     }
-  // ]
-  // }
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -142,7 +103,7 @@ export default async function CheckoutPage({ searchParams }) {
         <main className="flex-1 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-8 p-8">
           <div className="bg-white shadow-lg rounded-lg p-8">
             <h1 className="text-2xl font-bold mb-4">Checkout</h1>
-            <CheckoutForm />
+            <CheckoutForm userData={userData} setUserData={setUserData} />
             <PropertyRules property={property} />
           </div>
           <div className="bg-white shadow-lg rounded-lg p-8 h-fit">
@@ -180,11 +141,11 @@ export default async function CheckoutPage({ searchParams }) {
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <div className="w-[80%]">
-                  <p className="font-medium">{property.general.name}</p>
-                  <p className="text-gray-500">{property.general.address}</p>
+                  <p className="font-medium">{property?.general?.name}</p>
+                  <p className="text-gray-500">{property?.general?.address}</p>
                   <p className="text-gray-500">
-                    {property.general.city} ,{property.general.region} ,{" "}
-                    {property.general.state}
+                    {property?.general?.city} ,{property?.general?.region} ,{" "}
+                    {property?.general?.state}
                   </p>
                 </div>
                 <p className="ml-auto font-medium">
@@ -200,7 +161,7 @@ export default async function CheckoutPage({ searchParams }) {
                 </div>
               </div>
               <div className="flex flex-col gap-3">
-              <CreateBookingBtn bookingData={bookingData} className=" w-full justify-start" />
+              <CreateBookingBtn bookingData={bookingData} className=" w-full" />
               <p className="text-sm text-gray-500 dark:text-gray-400">
               By placing your order, you agree to our{" "}
               <Link href="#" className="underline" prefetch={false}>
