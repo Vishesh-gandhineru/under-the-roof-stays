@@ -66,7 +66,7 @@ export async function GenerateOtpForResgistrastion (body , setIsLoading , setErr
     axios.post(url, {
         "phone": body.phoneNumber,
         "countryCode": body.countryCode
-    })
+    } , config)
     .then((response) => {        
         console.log(response);
         setIsLoading(false);
@@ -90,7 +90,7 @@ export  function verifyRegisterOTP (OtpBody , setOtpVerified , FormData){
         "phone": OtpBody.phoneNumber,
         "countryCode": OtpBody.countryCode,
         "otp": OtpBody.otp
-    })
+    }, config)
     .then((response) => {
         console.log(response);
         if (response.status === 200){
