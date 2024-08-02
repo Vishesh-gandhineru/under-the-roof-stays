@@ -49,7 +49,7 @@ export  function verifyOTP (body , setOtpVerified){
 
 export  function postRegistertion (body) {
     const registerUrl = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/register`;
-    axios.post(url, body)
+    axios.post(url, body, config)
     .then((response) => {
         console.log(response);
         return response;
@@ -94,9 +94,15 @@ export  function verifyRegisterOTP (OtpBody , setOtpVerified , FormData){
     .then((response) => {
         console.log(response);
         if (response.status === 200){
-    localStorage.setItem('Sessiontoken', response.data.sessionId);
+            localStorage.setItem('Sessiontoken', JSON.stringify(response.data.data));
     setOtpVerified(true);
-    postRegistertion (FormData);
+    postRegistertion ({
+        "phone": OtpBody.phoneNumber,
+        "countryCode": OtpBody.countryCode,
+        "email": FormData.email,
+        "firstName": FormData.firstName,
+        "lastName": FormData.lastName
+    });
         }
         return response;
     })
