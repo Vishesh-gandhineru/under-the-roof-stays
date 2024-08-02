@@ -47,9 +47,14 @@ export  function verifyOTP (body , setOtpVerified){
 }
 
 
-export  function postRegistertion (body) {
+export  function postRegistertion (body, sessionId) {
     const registerUrl = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/register`;
-    axios.post(registerUrl, body, config)
+    axios.post(registerUrl, body, {
+        headers: {
+            'Authorization': sessionId,
+            "X-API-Token" : `${process.env.NEXT_PUBLIC_AIP_ACCESS_TOKEN}`,
+        }
+    })
     .then((response) => {
         console.log(response);
         return response;
@@ -102,7 +107,7 @@ export  function verifyRegisterOTP (OtpBody , setOtpVerified , FormData){
         "email": FormData.email,
         "firstName": FormData.firstName,
         "lastName": FormData.lastName
-    });
+    } , response.data.data.sessionId);
         }
         return response;
     })
