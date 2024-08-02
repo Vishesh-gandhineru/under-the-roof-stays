@@ -49,7 +49,7 @@ export  function verifyOTP (body , setOtpVerified){
 
 export  function postRegistertion (body) {
     const registerUrl = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/register`;
-    axios.post(url, body, config)
+    axios.post(registerUrl, body, config)
     .then((response) => {
         console.log(response);
         return response;
